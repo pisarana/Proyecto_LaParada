@@ -150,27 +150,122 @@ const AuthModule = {
     },
 
     // Manejar login exitoso
-    handleLoginSuccess(user) {
-        this.state.isLoggedIn = true;
-        this.state.currentUser = user;
+    async handleLogin(event) {
+        event.preventDefault();
 
-        // Guardar sesión
-        this.saveSession();
+        const formData = new FormData(event.target);
+        const loginData = {
+            email: formData.get('email'),
+            password: formData.get('password')
+        };
 
-        this.showMessage(`¡Bienvenido ${user.nombre}!`, 'success');
+        this.showLoading(true);
 
-        // Disparar evento para otras páginas
-        window.dispatchEvent(new CustomEvent('authStateChanged', {
-            detail: {
-                isLoggedIn: true,
-                user: user
+        try {
+            let response;
+
+            if (ApiConfig.mode === 'real') {
+                // Login real con backend
+                response = await fetch(`${ApiConfig.baseURL}${ApiConfig.endpoints.auth.login}`, {
+                    method: 'POST',
+                    headers: ApiConfig.headers,
+                    body: JSON.stringify(loginData)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    this.processLogin(data.user, data.token);
+                } else {
+                    throw new Error(data.message);
+                }
+            } else {
+                // Login mock con verificación de admin
+                const mockResponse = this.mockLogin(loginData);
+                if (mockResponse.success) {
+                    this.processLogin(mockResponse.user, mockResponse.token);
+                } else {
+                    throw new Error(mockResponse.message);
+                }
             }
-        }));
 
-        // Redirigir después de 2 segundos
+        } catch (error) {
+            console.error('Login error:', error);
+            LaParadaApp.showNotification(error.message || 'Error al iniciar sesión', 'error');
+        } finally {
+            this.showLoading(false);
+        }
+    },
+    processLogin(user, token) {
+        // Guardar datos del usuario
+        localStorage.setItem('laparada_user', JSON.stringify(user));
+        localStorage.setItem('laparada_token', token);
+
+        if (user.isAdmin) {
+            localStorage.setItem('admin_session', Date.now().toString());
+        }
+
+        LaParradaApp.showNotification(`¡Bienvenido, ${user.nombre}!`, 'success');
+
+        // Redirigir según el rol
         setTimeout(() => {
-            window.location.href = '../../index.html';
-        }, 2000);
+            if (user.isAdmin) {
+                window.location.href = '../admin/dashboard.html';
+            } else {
+                window.location.href = '../../index.html';
+            }
+        }, 1500);
+    },
+    mockLogin(loginData) {
+        // Credenciales de administrador por defecto
+        const adminCredentials = {
+            email: 'admin@laparada.com',
+            password: 'admin123'
+        };
+
+        // Credenciales de usuario normal
+        const userCredentials = {
+            email: 'user@laparada.com',
+            password: 'user123'
+        };
+
+        // Verificar credenciales de admin
+        if (loginData.email === adminCredentials.email && loginData.password === adminCredentials.password) {
+            return {
+                success: true,
+                user: {
+                    id: 1,
+                    nombre: 'Administrador',
+                    apellido: 'Sistema',
+                    email: loginData.email,
+                    role: 'admin',
+                    isAdmin: true,
+                    permissions: ['all']
+                },
+                token: 'mock_admin_token_' + Date.now()
+            };
+        }
+
+        // Verificar credenciales de usuario normal
+        if (loginData.email === userCredentials.email && loginData.password === userCredentials.password) {
+            return {
+                success: true,
+                user: {
+                    id: 2,
+                    nombre: 'Usuario',
+                    apellido: 'Normal',
+                    email: loginData.email,
+                    role: 'customer',
+                    isAdmin: false,
+                    permissions: ['shop']
+                },
+                token: 'mock_user_token_' + Date.now()
+            };
+        }
+
+        return {
+            success: false,
+            message: 'Credenciales incorrectas'
+        };
     },
 
     // Guardar sesión

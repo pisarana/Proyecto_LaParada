@@ -1,4 +1,46 @@
 // ===== CONFIGURACIÓN GLOBAL CORREGIDA =====
+function updateNavbarForUser() {
+    try {
+        const userData = localStorage.getItem('laparada_user');
+        if (userData) {
+            const user = JSON.parse(userData);
+            const navbar = document.querySelector('.navbar-nav');
+
+            if (user.isAdmin && navbar) {
+                // Agregar enlace al panel admin
+                const adminLink = document.createElement('li');
+                adminLink.className = 'nav-item';
+                adminLink.innerHTML = `
+                    <a class="nav-link nav-btn" href="pages/admin/dashboard.html">
+                        <i class="fas fa-cog me-1"></i> Panel Admin
+                    </a>
+                `;
+
+                navbar.appendChild(adminLink);
+
+                // Actualizar botón de login para mostrar admin
+                const loginBtn = document.getElementById('loginBtn');
+                if (loginBtn) {
+                    loginBtn.innerHTML = `
+                        <i class="fas fa-user-shield me-1"></i> 
+                        Hola, ${user.nombre}
+                    `;
+                    loginBtn.href = '#';
+                    loginBtn.onclick = () => {
+                        if (confirm('¿Cerrar sesión?')) {
+                            localStorage.clear();
+                            location.reload();
+                        }
+                    };
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error updating navbar:', error);
+    }
+}
+document.addEventListener('DOMContentLoaded', updateNavbarForUser);
+
 const App = {
     // Configuración
     config: {
@@ -490,9 +532,9 @@ const App = {
             if (cartData) {
                 cart = JSON.parse(cartData);
             }
-            
+
             const existingItem = cart.find(item => item.id === product.id);
-            
+
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
@@ -502,16 +544,16 @@ const App = {
                     addedAt: new Date().toISOString()
                 });
             }
-            
+
             localStorage.setItem('laparada_cart', JSON.stringify(cart));
             this.updateCartUI();
-            
+
             // Si estamos en la página del carrito, actualizar inmediatamente
             if (window.CartModule) {
                 CartModule.loadCartFromStorage();
                 CartModule.renderCart();
             }
-            
+
         } catch (error) {
             console.error('Error adding to cart:', error);
         }
