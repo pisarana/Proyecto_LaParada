@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minimarket La Parada - Inicio</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- CSS personalizado -->
     <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navbar Principal -->
     <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
@@ -24,27 +27,24 @@
             <!-- Logo y Marca -->
             <a class="navbar-brand" href="index.html">
                 <div class="brand-container">
-                    <img src="assets/images/LaParadaLogo.jpg" 
-                         alt="Logo La Parada" 
-                         class="brand-logo"
-                         onerror="this.style.display='none'">
+                    <img src="assets/images/LaParadaLogo.jpg" alt="Logo La Parada" class="brand-logo"
+                        onerror="this.style.display='none'">
                     <span class="brand-text">La Parada</span>
                 </div>
             </a>
-            
+
             <!-- Toggle para móviles -->
-            <button class="navbar-toggler custom-toggler" type="button" 
-                    data-bs-toggle="collapse" data-bs-target="#navbarContent" 
-                    aria-controls="navbarContent" aria-expanded="false">
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarContent">
                 <!-- Enlaces de navegación -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link nav-btn active" href="pages/products/catalog.html">
+                        <a class="nav-link nav-btn" href="pages/products/catalog.html">
                             <i class="fas fa-store me-1"></i> Tienda
                         </a>
                     </li>
@@ -59,7 +59,7 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 <!-- Acciones del usuario -->
                 <div class="navbar-actions">
                     <a href="pages/cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
@@ -97,33 +97,49 @@
             </div>
         </div>
     </section>
+    <!-- Modal Vista Rápida -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quickViewModalLabel">Vista Rápida del Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="quickViewContent">
+                    <!-- Contenido se carga dinámicamente -->
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero-main" id="heroSection">
         <div class="hero-container">
             <!-- Imagen de fondo del hero -->
             <div class="hero-background">
-                <img src="assets/images/minimarket-collage.jpg" 
-                     alt="Interior Minimarket La Parada"
-                     class="hero-img"
-                     onerror="this.src='https://via.placeholder.com/1200x500/4CAF50/ffffff?text=Minimarket+La+Parada'">
+                <img src="assets/images/minimarket-collage.jpg" alt="Interior Minimarket La Parada" class="hero-img"
+                    onerror="this.src='https://via.placeholder.com/1200x500/4CAF50/ffffff?text=Minimarket+La+Parada'">
                 <div class="hero-overlay"></div>
             </div>
-            
+
             <!-- Contenido del hero -->
             <div class="hero-content">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8 text-center">
                             <h1 class="hero-title animate-fade-in">
-                                Bienvenido al minimarket 
+                                Bienvenido al minimarket
                                 <span class="title-highlight">"La Parada"</span>
                             </h1>
                             <p class="hero-description animate-fade-in-delay">
                                 Tienda de comestibles
                             </p>
-                            <a href="pages/products/catalog.html" 
-                               class="btn btn-hero-cta animate-fade-in-delay-2">
+                            <a href="pages/products/catalog.html" class="btn btn-hero-cta animate-fade-in-delay-2">
                                 <i class="fas fa-shopping-basket me-2"></i>
                                 Explorar Productos
                             </a>
@@ -133,43 +149,43 @@
             </div>
         </div>
     </section>
-<!-- Productos Destacados Mejorados -->
-<section class="featured-section" id="featuredProducts">
-    <div class="container-fluid"> <!-- Cambiado a container-fluid para usar toda la pantalla -->
-        <div class="container">
-            <div class="section-header text-center">
-                <h2 class="section-title">Los productos más vendidos</h2>
-                <p class="section-subtitle">Descubre nuestros productos más populares con los mejores precios</p>
-                <div class="title-separator"></div>
+    <!-- Productos Destacados Mejorados -->
+    <section class="featured-section" id="featuredProducts">
+        <div class="container-fluid"> <!-- Cambiado a container-fluid para usar toda la pantalla -->
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Los productos más vendidos</h2>
+                    <p class="section-subtitle">Descubre nuestros productos más populares con los mejores precios</p>
+                    <div class="title-separator"></div>
+                </div>
+            </div>
+
+            <!-- Loading spinner -->
+            <div class="loading-container text-center" id="productsLoading">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando productos...</span>
+                </div>
+            </div>
+
+            <!-- Contenedor de productos - Ahora usa container-fluid -->
+            <div class="container">
+                <div class="row products-grid justify-content-center" id="productsContainer">
+                    <!-- Los productos se cargan dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Botón ver más -->
+            <div class="container">
+                <div class="text-center mt-5">
+                    <a href="pages/products/catalog.html" class="btn btn-view-more">
+                        <i class="fas fa-th-large me-2"></i>
+                        Ver Todos los Productos
+                        <span class="badge bg-light text-dark ms-2">+100 productos</span>
+                    </a>
+                </div>
             </div>
         </div>
-        
-        <!-- Loading spinner -->
-        <div class="loading-container text-center" id="productsLoading">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Cargando productos...</span>
-            </div>
-        </div>
-        
-        <!-- Contenedor de productos - Ahora usa container-fluid -->
-        <div class="container">
-            <div class="row products-grid justify-content-center" id="productsContainer">
-                <!-- Los productos se cargan dinámicamente -->
-            </div>
-        </div>
-        
-        <!-- Botón ver más -->
-        <div class="container">
-            <div class="text-center mt-5">
-                <a href="pages/products/catalog.html" class="btn btn-view-more">
-                    <i class="fas fa-th-large me-2"></i>
-                    Ver Todos los Productos
-                    <span class="badge bg-light text-dark ms-2">+100 productos</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
 
     <!-- Footer -->
@@ -191,7 +207,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Horarios -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Horarios de atención</h5>
@@ -206,7 +222,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Ubicación -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Ubicación</h5>
@@ -217,7 +233,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Contacto -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Contacto</h5>
@@ -235,7 +251,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Copyright -->
             <div class="footer-bottom">
                 <div class="row align-items-center">
@@ -259,10 +275,13 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Scripts -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- TUS scripts después -->
     <script src="js/mock-data.js"></script>
     <script src="js/app.js"></script>
     <script src="js/modules/products.js"></script>
+
 </body>
+
 </html>

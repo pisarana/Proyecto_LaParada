@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Minimarket La Parada</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/contact.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar Principal -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+        <div class="container">
+            <!-- Logo y Marca -->
+            <a class="navbar-brand" href="../index.html">
+                <div class="brand-container">
+                    <img src="../assets/images/LaParadaLogo.jpg" 
+                         alt="Logo La Parada" 
+                         class="brand-logo"
+                         onerror="this.style.display='none'">
+                    <span class="brand-text">La Parada</span>
+                </div>
+            </a>
+            
+            <!-- Toggle para móviles -->
+            <button class="navbar-toggler custom-toggler" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+                    aria-controls="navbarContent" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Contenido del navbar -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Enlaces de navegación -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="products/catalog.html">
+                            <i class="fas fa-store me-1"></i> Tienda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="about.html">
+                            <i class="fas fa-users me-1"></i> Nosotros
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn active" href="contact.html">
+                            <i class="fas fa-envelope me-1"></i> Contáctanos
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Acciones del usuario -->
+                <div class="navbar-actions">
+                    <a href="cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>
+                        <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+                    </a>
+                    <a href="auth/login.html" class="btn btn-login" id="loginBtn">
+                        <i class="fas fa-user me-1"></i> Iniciar sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Principal de Contacto -->
+    <section class="contact-main">
+        <div class="container">
+            <div class="row align-items-center min-vh-75">
+                <!-- Información de Contacto - Lado Izquierdo -->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="contact-info">
+                        <h1 class="contact-title">
+                            ¿Dudas o consultas sobre nuestros productos?
+                        </h1>
+                        <p class="contact-subtitle">
+                            Nos dedicamos en ayudarte a resolver tus dudas
+                        </p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="method-content">
+                                    <p>Mediante el uso del formulario que se muestra en pantalla,</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-at"></i>
+                                </div>
+                                <div class="method-content">
+                                    <p>Por un lado, puedes comunicarte con nosotros con el siguiente correo:</p>
+                                    <a href="mailto:marketing@corpdevalle.com.pe" class="contact-link">
+                                        marketing@corpdevalle.com.pe
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="method-content">
+                                    <p>Por otro lado, si quieres una comunicación más directa puedes llamarnos en el siguiente número:</p>
+                                    <a href="tel:+5117134919" class="contact-link">
+                                        (01) 713-4919
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario de Contacto - Lado Derecho -->
+                <div class="col-lg-6">
+                    <div class="contact-form-container">
+                        <form id="contactForm" class="contact-form" novalidate>
+                            <div class="form-group mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="nombre" 
+                                       name="nombre"
+                                       placeholder="Ingrese sus nombres"
+                                       required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese su nombre.
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="apellido" 
+                                       name="apellido"
+                                       placeholder="Ingrese sus apellidos"
+                                       required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese su apellido.
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="email" 
+                                       class="form-control" 
+                                       id="correo" 
+                                       name="correo"
+                                       placeholder="Ingrese su correo"
+                                       required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese un correo válido.
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label for="asunto" class="form-label">Asunto o motivo de consulta</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="asunto" 
+                                       name="asunto"
+                                       placeholder="Ingrese su motivo de consulta"
+                                       required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese el asunto de su consulta.
+                                </div>
+                            </div>
+                            
+                            <div class="form-group mb-4">
+                                <label for="mensaje" class="form-label">Mensaje</label>
+                                <textarea class="form-control" 
+                                          id="mensaje" 
+                                          name="mensaje" 
+                                          rows="5"
+                                          placeholder="Ingrese la descripción del motivo de consulta"
+                                          required></textarea>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese su mensaje.
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-submit w-100" id="submitBtn">
+                                <span class="btn-text">Enviar</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin me-2"></i>
+                                    Enviando...
+                                </span>
+                            </button>
+                        </form>
+                        
+                        <!-- Mensaje de respuesta -->
+                        <div id="responseMessage" class="response-message" style="display: none;">
+                            <div class="alert" role="alert">
+                                <i class="fas fa-check-circle me-2"></i>
+                                <span id="responseText"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row">
+                <!-- Redes Sociales -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Síguenos</h5>
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link instagram" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link whatsapp" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Horarios -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Horarios de atención</h5>
+                    <div class="footer-info">
+                        <p class="info-item">
+                            <i class="far fa-clock me-2"></i>
+                            Domingo a viernes: 7:00 AM a 10:00 PM
+                        </p>
+                        <p class="info-item">
+                            <i class="far fa-clock me-2"></i>
+                            Sábados: 7:00 AM a 11:00 PM
+                        </p>
+                        <h6>Correo</h6>
+                        <p class="info-item">
+                            <i class="fas fa-envelope me-2"></i>
+                            <a href="mailto:marketing@corpdevalle.com.pe" class="footer-link">
+                                marketing@corpdevalle.com.pe
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Ubicación -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Ubicación</h5>
+                    <div class="footer-info">
+                        <p class="info-item">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            La Victoria - Lima - Lima
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Contacto -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Número de teléfono</h5>
+                    <div class="footer-info">
+                        <p class="info-item">
+                            <i class="fas fa-phone me-2"></i>
+                            <a href="tel:+5117134160" class="footer-link">(01) 7134160</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright">
+                            &copy; 2025 Minimarket La Parada. Todos los derechos reservados.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <p class="dev-credit">
+                            Desarrollado por <span class="highlight">Equipo UTP</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Scroll to Top -->
+    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/modules/contact.js"></script>
+</body>
+</html>

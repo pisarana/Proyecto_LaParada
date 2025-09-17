@@ -1,208 +1,186 @@
 // ===== DATOS SIMULADOS =====
-const MOCK_DATA = {
-    // Categorías
-    categories: [
-        { id: 1, name: "Bebidas", icon: "fas fa-glass-whiskey", color: "#3498db" },
-        { id: 2, name: "Snacks", icon: "fas fa-cookie-bite", color: "#e67e22" },
-        { id: 3, name: "Lácteos", icon: "fas fa-cheese", color: "#f39c12" },
-        { id: 4, name: "Panadería", icon: "fas fa-bread-slice", color: "#d35400" },
-        { id: 5, name: "Abarrotes", icon: "fas fa-box", color: "#27ae60" },
-        { id: 6, name: "Carnes", icon: "fas fa-drumstick-bite", color: "#c0392b" },
-        { id: 7, name: "Frutas y Verduras", icon: "fas fa-apple-alt", color: "#2ecc71" },
-        { id: 8, name: "Limpieza", icon: "fas fa-spray-can", color: "#9b59b6" }
-    ],
-
-    // Usuarios de prueba
-    users: [
-        {
-            id: 1,
-            name: "Admin",
-            email: "admin@laparada.com",
-            password: "admin123",
-            role: "ADMIN",
-            avatar: "assets/images/avatars/admin.jpg",
-            phone: "+51987654321",
-            address: "La Victoria, Lima"
-        },
-        {
-            id: 2,
-            name: "Carlos Mendoza",
-            email: "carlos@gmail.com",
-            password: "cliente123",
-            role: "CLIENTE",
-            avatar: "assets/images/avatars/client1.jpg",
-            phone: "+51912345678",
-            address: "San Luis, Lima"
-        }
-    ],
-
-    // Productos ampliados
+//MISAEL CHALLCO 17-09
+//AGREGAR IMAGENES FALTANTES DE GOOGLE Y SUBIR SUS CAMBIOS
+const MockData = {
     products: [
+        // BEBIDAS
         {
             id: 1,
             name: "Coca Cola 500ml",
-            category: "Bebidas",
-            categoryId: 1,
-            price: 2.50,
-            originalPrice: 3.00,
-            image: "assets/images/products/coca-cola.jpg",
-            gallery: [
-                "assets/images/products/coca-cola-1.jpg",
-                "assets/images/products/coca-cola-2.jpg"
-            ],
-            description: "Gaseosa Coca Cola 500ml refrescante, perfecta para cualquier momento del día",
-            longDescription: "La Coca Cola 500ml es la bebida refrescante más popular del mundo. Con su sabor único e inconfundible, es perfecta para acompañar tus comidas o disfrutar en cualquier momento del día. Elaborada con ingredientes de la más alta calidad.",
+            category: "bebidas",
+            price: 3.50,
+            originalPrice: 4.00,
+            image: "../../assets/images/products/cocacola.jpg",
+            description: "Refresco de cola clásico",
             stock: 50,
             rating: 4.5,
-            reviews: 128,
-            discount: 17,
-            isNew: false,
-            isFeatured: true,
-            brand: "Coca Cola",
-            barcode: "7750885005012",
-            weight: "500ml",
-            nutritionalInfo: {
-                calories: 210,
-                sugar: "27g",
-                sodium: "75mg"
-            },
-            tags: ["refrescante", "gaseosa", "coca-cola", "500ml"]
+            reviews: 128
         },
         {
             id: 2,
-            name: "Galletas Oreo Original",
-            category: "Snacks",
-            categoryId: 2,
-            price: 3.20,
-            originalPrice: 3.80,
-            image: "assets/images/products/oreo.jpg",
-            description: "Galletas Oreo original 154g, el clásico sabor que amas",
-            stock: 35,
+            name: "Agua San Luis 625ml",
+            category: "bebidas",
+            price: 1.50,
+            image: "../../assets/images/products/agua-san-luis.jpg",
+            description: "Agua mineral natural",
+            stock: 100,
             rating: 4.8,
-            reviews: 89,
-            discount: 16,
-            isNew: false,
-            isFeatured: true,
-            brand: "Oreo",
-            weight: "154g",
-            tags: ["galletas", "oreo", "original", "snack"]
-        }
-        // ... más productos
-    ],
-
-    // Ofertas especiales
-    specialOffers: [
-        {
-            id: 1,
-            title: "2x1 en Bebidas",
-            description: "Lleva 2 bebidas por el precio de 1",
-            image: "assets/images/offers/2x1-bebidas.jpg",
-            discount: 50,
-            validUntil: "2025-12-31",
-            categoryId: 1
+            reviews: 95
         },
-        {
-            id: 2,
-            title: "30% OFF en Snacks",
-            description: "Descuento en toda la línea de snacks",
-            image: "assets/images/offers/30-off-snacks.jpg",
-            discount: 30,
-            validUntil: "2025-11-30",
-            categoryId: 2
-        }
-    ],
-
-    // Testimonios
-    testimonials: [
-        {
-            id: 1,
-            name: "María González",
-            avatar: "assets/images/testimonials/maria.jpg",
-            rating: 5,
-            comment: "Excelente servicio y productos frescos. La entrega es muy rápida.",
-            date: "2025-08-15"
-        },
-        {
-            id: 2,
-            name: "José Ramirez",
-            avatar: "assets/images/testimonials/jose.jpg",
-            rating: 5,
-            comment: "La mejor opción para compras rápidas. Precios justos y buena atención.",
-            date: "2025-08-10"
-        }
-    ],
-
-    // Preguntas frecuentes
-    faqs: [
-        {
-            id: 1,
-            question: "¿Cuál es el horario de atención?",
-            answer: "Estamos abiertos de lunes a viernes de 7:00 AM a 10:00 PM, y sábados de 7:00 AM a 11:00 PM."
-        },
-        {
-            id: 2,
-            question: "¿Hacen delivery?",
-            answer: "Sí, realizamos delivery en todas nuestras zonas de cobertura. El tiempo de entrega es de 30-45 minutos."
-        },
+        // LÁCTEOS
         {
             id: 3,
-            question: "¿Cuáles son los métodos de pago?",
-            answer: "Aceptamos efectivo, tarjetas de débito/crédito, Yape, Plin y transferencias bancarias."
+            name: "Leche Gloria UHT 1L",
+            category: "lacteos",
+            price: 4.20,
+            image: "../../assets/images/products/leche-gloria.jpg",
+            description: "Leche entera ultra pasteurizada",
+            stock: 30,
+            rating: 4.6,
+            reviews: 87
+        },
+        {
+            id: 4,
+            name: "Queso Bonlé Fresco",
+            category: "lacteos",
+            price: 8.50,
+            originalPrice: 9.00,
+            image: "../../assets/images/products/queso-bonle.jpg",
+            description: "Queso fresco premium",
+            stock: 15,
+            rating: 4.4,
+            reviews: 63
+        },
+        // ASEO PERSONAL
+        {
+            id: 5,
+            name: "Champú Pantene 400ml",
+            category: "aseo-personal",
+            price: 12.90,
+            image: "../../assets/images/products/champu-pantene.jpg",
+            description: "Champú reparador dorado",
+            stock: 25,
+            rating: 4.7,
+            reviews: 142
+        },
+        {
+            id: 6,
+            name: "Jabón Dove Original",
+            category: "aseo-personal",
+            price: 3.80,
+            image: "../../assets/images/products/jabon-dove.jpg",
+            description: "Jabón humectante original",
+            stock: 40,
+            rating: 4.3,
+            reviews: 76
+        },
+        // CARNES
+        {
+            id: 7,
+            name: "Pollo Entero San Fernando",
+            category: "carnes",
+            price: 15.50,
+            originalPrice: 17.00,
+            image: "../../assets/images/products/pollo-san-fernando.jpg",
+            description: "Pollo fresco entero",
+            stock: 8,
+            rating: 4.5,
+            reviews: 54
+        },
+        {
+            id: 8,
+            name: "Salchichas Otto Kunz",
+            category: "carnes",
+            price: 6.90,
+            image: "../../assets/images/products/salchichas-otto.jpg",
+            description: "Salchichas premium",
+            stock: 20,
+            rating: 4.2,
+            reviews: 89
+        },
+        // FRUTAS Y VERDURAS
+        {
+            id: 9,
+            name: "Manzanas Red Delicious",
+            category: "frutas-verduras",
+            price: 5.50,
+            image: "../../assets/images/products/manzanas-red.jpg",
+            description: "Manzanas rojas dulces por kg",
+            stock: 35,
+            rating: 4.6,
+            reviews: 43
+        },
+        {
+            id: 10,
+            name: "Tomates Cherry",
+            category: "frutas-verduras",
+            price: 8.20,
+            originalPrice: 9.50,
+            image: "../../assets/images/products/tomates-cherry.jpg",
+            description: "Tomates cherry frescos por kg",
+            stock: 12,
+            rating: 4.8,
+            reviews: 67
+        },
+        // PANADERÍA
+        {
+            id: 11,
+            name: "Pan Integral Bimbo",
+            category: "panaderia",
+            price: 4.80,
+            image: "../../assets/images/products/pan-integral-bimbo.jpg",
+            description: "Pan integral en rebanadas",
+            stock: 22,
+            rating: 4.4,
+            reviews: 91
+        },
+        {
+            id: 12,
+            name: "Donitas Bimbo Pack 6",
+            category: "panaderia",
+            price: 7.20,
+            originalPrice: 8.00,
+            image: "../../assets/images/products/donitas-bimbo.jpg",
+            description: "Donitas glaseadas pack de 6",
+            stock: 18,
+            rating: 4.1,
+            reviews: 156
         }
+    ],
+
+    categories: [
+        { id: 'bebidas', name: 'Bebidas', icon: 'fas fa-wine-bottle' },
+        { id: 'lacteos', name: 'Lácteos', icon: 'fas fa-cheese' },
+        { id: 'aseo-personal', name: 'Aseo Personal', icon: 'fas fa-pump-soap' },
+        { id: 'carnes', name: 'Carnes', icon: 'fas fa-drumstick-bite' },
+        { id: 'frutas-verduras', name: 'Frutas y Verduras', icon: 'fas fa-apple-alt' },
+        { id: 'panaderia', name: 'Panadería', icon: 'fas fa-bread-slice' }
     ]
 };
 
-// Funciones helper para acceder a los datos
-const MockDataHelper = {
-    // Obtener producto por ID
-    getProductById(id) {
-        return MOCK_DATA.products.find(product => product.id === parseInt(id));
+//PARA EL BACKEND
+const ApiConfig = {
+    mode: 'mock', // Cambiar a 'real' cuando tengas Spring Boot
+    baseURL: 'http://localhost:8080/api',
+    endpoints: {
+        products: '/productos',
+        categories: '/categorias',
+        search: '/productos/buscar',
+        productById: '/productos/',
+        addToCart: '/carrito/agregar',
+        cart: '/carrito',
+        auth: {
+            login: '/auth/login',
+            register: '/auth/registro',
+            logout: '/auth/logout'
+        }
     },
-
-    // Obtener productos por categoría
-    getProductsByCategory(categoryId) {
-        return MOCK_DATA.products.filter(product => product.categoryId === parseInt(categoryId));
-    },
-
-    // Obtener productos destacados
-    getFeaturedProducts() {
-        return MOCK_DATA.products.filter(product => product.isFeatured);
-    },
-
-    // Obtener productos nuevos
-    getNewProducts() {
-        return MOCK_DATA.products.filter(product => product.isNew);
-    },
-
-    // Obtener productos con descuento
-    getDiscountedProducts() {
-        return MOCK_DATA.products.filter(product => product.discount > 0);
-    },
-
-    // Buscar productos
-    searchProducts(query) {
-        const searchTerm = query.toLowerCase();
-        return MOCK_DATA.products.filter(product =>
-            product.name.toLowerCase().includes(searchTerm) ||
-            product.description.toLowerCase().includes(searchTerm) ||
-            product.category.toLowerCase().includes(searchTerm) ||
-            (product.tags && product.tags.some(tag => tag.includes(searchTerm)))
-        );
-    },
-
-    // Obtener categoría por ID
-    getCategoryById(id) {
-        return MOCK_DATA.categories.find(category => category.id === parseInt(id));
-    },
-
-    // Obtener usuario por email y password
-    getUserByCredentials(email, password) {
-        return MOCK_DATA.users.find(user => 
-            user.email === email && user.password === password
-        );
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
     }
 };
 
 // Exponer globalmente
-window.MOCK_DATA = MOCK_DATA;
-window.MockDataHelper = MockDataHelper;
+window.MockData = MockData;
+window.ApiConfig = ApiConfig;

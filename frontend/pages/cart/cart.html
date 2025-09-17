@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Minimarket La Parada</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/cart.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <div class="brand-container">
+                    <img src="../../assets/images/LaParadaLogo.jpg" alt="Logo La Parada" class="brand-logo"
+                        onerror="this.style.display='none'">
+                    <span class="brand-text">La Parada</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../products/catalog.html">
+                            <i class="fas fa-store me-1"></i> Tienda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../about.html">
+                            <i class="fas fa-users me-1"></i> Nosotros
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../contact.html">
+                            <i class="fas fa-envelope me-1"></i> Contáctanos
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="navbar-actions">
+                    <a href="cart.html" class="btn btn-cart me-2 active" id="cartBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>
+                        <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+                    </a>
+                    <a href="../auth/login.html" class="btn btn-login" id="loginBtn">
+                        <i class="fas fa-user me-1"></i> Iniciar sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="breadcrumb-section">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Carrito</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="cart-title">Carrito</h1>
+                </div>
+            </div>
+
+            <!-- Cart Content -->
+            <div class="row">
+                <!-- Cart Items - Left Column -->
+                <div class="col-lg-8 col-md-7">
+                    <div class="cart-items-container">
+                        <!-- Cart Table -->
+                        <div class="cart-table-container" id="cartTableContainer">
+                            <table class="cart-table table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Producto</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">SubTotal</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cartTableBody">
+                                    <!-- Cart items se insertan aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Empty Cart State -->
+                        <div class="empty-cart-state" id="emptyCartState" style="display: none;">
+                            <div class="text-center py-5">
+                                <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
+                                <h4>Tu carrito está vacío</h4>
+                                <p class="text-muted mb-4">¡Agrega algunos productos y comienza a comprar!</p>
+                                <a href="../products/catalog.html" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-store me-2"></i>
+                                    Ir a la Tienda
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Cart Actions -->
+                        <div class="cart-actions" id="cartActions" style="display: none;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn btn-outline-danger" onclick="CartModule.clearCart()">
+                                        <i class="fas fa-trash me-2"></i>
+                                        Vaciar Carrito
+                                    </button>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <a href="../products/catalog.html" class="btn btn-outline-primary">
+                                        <i class="fas fa-arrow-left me-2"></i>
+                                        Seguir Comprando
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart Summary - Right Column -->
+                <div class="col-lg-4 col-md-5">
+                    <div class="cart-summary-container" id="cartSummaryContainer" style="display: none;">
+                        <div class="cart-summary">
+                            <h4 class="summary-title">Precio total del carrito</h4>
+
+                            <!-- Price Breakdown -->
+                            <div class="price-breakdown">
+                                <div class="price-item">
+                                    <span class="price-label">Subtotal:</span>
+                                    <span class="price-value" id="cartSubtotal">S/. 0.00</span>
+                                </div>
+                                <div class="price-item" id="shippingRow" style="display: none;">
+                                    <span class="price-label">Envío:</span>
+                                    <span class="price-value" id="cartShipping">S/. 0.00</span>
+                                </div>
+                                <div class="price-item" id="discountRow" style="display: none;">
+                                    <span class="price-label">Descuento:</span>
+                                    <span class="price-value text-success" id="cartDiscount">-S/. 0.00</span>
+                                </div>
+                                <hr class="summary-divider">
+                                <div class="price-item price-total">
+                                    <span class="price-label">Total:</span>
+                                    <span class="price-value" id="cartTotal">S/. 0.00</span>
+                                </div>
+                            </div>
+
+                            <!-- Coupon Code -->
+                            <div class="coupon-section">
+                                <div class="coupon-form">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="couponInput"
+                                            placeholder="Código de descuento">
+                                        <button class="btn btn-outline-secondary" type="button" id="applyCouponBtn"
+                                            onclick="CartModule.applyCoupon()">
+                                            Aplicar
+                                        </button>
+                                    </div>
+                                    <small class="text-muted">¿Tienes un código de descuento?</small>
+                                </div>
+                            </div>
+
+                            <!-- Checkout Button -->
+                            <div class="checkout-section">
+                                <!-- Este botón ya llama a CartModule.proceedToCheckout() -->
+                                <button class="btn btn-checkout btn-lg w-100" id="checkoutBtn"
+                                    onclick="CartModule.proceedToCheckout()">
+                                    <i class="fas fa-credit-card me-2"></i>
+                                    Finalizar compra
+                                </button>
+
+
+                                <!-- Payment Methods -->
+                                <div class="payment-methods mt-3">
+                                    <small class="text-muted d-block text-center mb-2">Métodos de pago
+                                        aceptados:</small>
+                                    <div class="payment-icons text-center">
+                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        <i class="fab fa-cc-paypal"></i>
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Security Badge -->
+                            <div class="security-badge text-center mt-3">
+                                <i class="fas fa-shield-alt text-success me-2"></i>
+                                <small class="text-muted">Compra 100% segura</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Products -->
+            <div class="row mt-5" id="recommendedSection" style="display: none;">
+                <div class="col-12">
+                    <h4 class="recommended-title">También te puede interesar</h4>
+                    <div class="recommended-products" id="recommendedProducts">
+                        <!-- Productos recomendados se insertan aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Síguenos</h5>
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Horarios de atención</h5>
+                    <div class="footer-info">
+                        <p><i class="far fa-clock me-2"></i>Domingo a viernes: 7:00 AM a 10:00 PM</p>
+                        <p><i class="far fa-clock me-2"></i>Sábados: 7:00 AM a 11:00 PM</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Ubicación</h5>
+                    <div class="footer-info">
+                        <p><i class="fas fa-map-marker-alt me-2"></i>La Victoria - Lima - Lima</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Número de teléfono</h5>
+                    <div class="footer-info">
+                        <p><i class="fas fa-phone me-2"></i><a href="tel:+5117134160">(01) 7134160</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright">&copy; 2025 Minimarket La Parada. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <p class="dev-credit">Desarrollado por <span class="highlight">Equipo UTP</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/mock-data.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../../js/modules/cart.js"></script>
+</body>
+
+</html>

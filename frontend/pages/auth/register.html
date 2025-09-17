@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Minimarket La Parada</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/auth.css" rel="stylesheet">
+</head>
+
+<body class="auth-body">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <div class="brand-container">
+                    <img src="../../assets/images/LaParadaLogo.jpg" alt="Logo La Parada" class="brand-logo"
+                        onerror="this.style.display='none'">
+                    <span class="brand-text">La Parada</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../products/catalog.html">
+                            <i class="fas fa-store me-1"></i> Tienda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../about.html">
+                            <i class="fas fa-users me-1"></i> Nosotros
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../contact.html">
+                            <i class="fas fa-envelope me-1"></i> Contáctanos
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="navbar-actions">
+                    <a href="../cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>
+                        <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+                    </a>
+                    <a href="login.html" class="btn btn-login" id="loginBtn">
+                        <i class="fas fa-user me-1"></i> Iniciar sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección de Registro -->
+    <section class="register-section">
+        <div class="container-fluid">
+            <div class="row min-vh-100">
+                <!-- Formulario de Registro - Lado Izquierdo -->
+                <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                    <div class="register-container">
+                        <div class="register-header">
+                            <h1 class="register-title">Crear una cuenta</h1>
+                            <p class="register-subtitle">Rellenar los datos</p>
+                        </div>
+
+                        <form id="registerForm" class="register-form" novalidate>
+                            <!-- Campo Nombre -->
+                            <div class="form-group mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                        placeholder="Ingrese su nombre" required>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese su nombre.
+                                </div>
+                            </div>
+
+                            <!-- Campo Apellido -->
+                            <div class="form-group mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="apellido" name="apellido"
+                                        placeholder="Ingrese su apellido" required>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese su apellido.
+                                </div>
+                            </div>
+
+                            <!-- Campo Correo -->
+                            <div class="form-group mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control" id="correo" name="correo"
+                                        placeholder="Ingrese su correo" required>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese un correo válido.
+                                </div>
+                            </div>
+
+                            <!-- Campo Teléfono -->
+                            <div class="form-group mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-phone"></i>
+                                    </span>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono"
+                                        placeholder="Ingrese su teléfono" required>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese un teléfono válido.
+                                </div>
+                            </div>
+
+                            <!-- Campo Contraseña -->
+                            <div class="form-group mb-4">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Ingrese una contraseña" required>
+                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback">
+                                    La contraseña debe tener al menos 6 caracteres.
+                                </div>
+                                <div class="password-strength" id="passwordStrength">
+                                    <div class="strength-indicator">
+                                        <div class="strength-bar"></div>
+                                    </div>
+                                    <span class="strength-text">Fortaleza de la contraseña</span>
+                                </div>
+                            </div>
+
+                            <!-- Términos y condiciones -->
+                            <div class="form-group mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terminos" name="terminos"
+                                        required>
+                                    <label class="form-check-label" for="terminos">
+                                        Acepto los <a href="#" class="terms-link">términos y condiciones</a>
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        Debe aceptar los términos y condiciones.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botón de registro -->
+                            <button type="submit" class="btn btn-register w-100" id="registerButton">
+                                <span class="btn-text">Crear cuenta</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin me-2"></i>
+                                    Registrando...
+                                </span>
+                            </button>
+
+                            <!-- Enlace de login -->
+                            <div class="login-link mt-4">
+                                <p class="text-center">
+                                    ¿Ya tienes una cuenta?
+                                    <a href="login.html" class="login-link-text">Iniciar sesión aquí</a>
+                                </p>
+                            </div>
+                        </form>
+
+                        <!-- Mensaje de respuesta -->
+                        <div id="registerMessage" class="register-message" style="display: none;">
+                            <div class="alert" role="alert">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <span id="registerMessageText"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo - Lado Derecho -->
+                <div class="col-lg-6 d-flex align-items-center justify-content-center bg-light">
+                    <div class="logo-section">
+                        <div class="logo-container-large">
+                            <img src="../../assets/images/LaParadaLogo.jpg" alt="Logo La Parada"
+                                class="logo-large"
+                                onerror="this.src='https://via.placeholder.com/300x300/8BC34A/ffffff?text=La+Parada'">
+                        </div>
+                        <div class="welcome-text">
+                            <h3>¡Únete a nuestra comunidad!</h3>
+                            <p>Crea tu cuenta y disfruta de ofertas exclusivas y una experiencia de compra personalizada
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../../js/modules/register.js"></script>
+</body>
+
+</html>

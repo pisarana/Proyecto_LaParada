@@ -323,13 +323,148 @@ const ProductsModule = {
         }
     },
 
-    // Vista rápida del producto
+
+    // Vista rápida del producto (CORREGIDA)
     quickView(productId) {
         const product = this.state.products.find(p => p.id === productId);
-        if (product) {
-            // Aquí podrías abrir un modal con detalles del producto
-            console.log('Quick view for:', product);
-            LaParadaApp.showNotification(`Vista rápida de ${product.name}`, 'info');
+        if (!product) {
+            LaParadaApp.showNotification('Producto no encontrado', 'error');
+            return;
+        }
+
+        // Mostrar modal
+        const modal = new bootstrap.Modal(document.getElementById('quickViewModal'));
+
+        // Cargar contenido
+        this.loadQuickViewContent(product);
+
+        // Mostrar modal
+        modal.show();
+    },
+
+    // Cargar contenido del modal
+    loadQuickViewContent(product) {
+        const modalContent = document.getElementById('quickViewContent');
+
+        // Calcular descuento
+        const hasDiscount = product.originalPrice && product.originalPrice > product.price;
+        const discountAmount = hasDiscount ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
+
+        // Generar estrellas
+        const starsHTML = this.generateRatingStars(product.rating);
+
+        // Estado del stock
+        const stockClass = product.stock > 10 ? 'stock-available' : product.stock > 0 ? 'stock-low' : 'stock-out';
+        const stockText = product.stock > 10 ? 'Disponible' : product.stock > 0 ? `Solo quedan ${product.stock}` : 'Agotado';
+
+        modalContent.innerHTML = `
+        <div class="quick-view-content">
+            <div class="row">
+                <!-- Imagen del producto -->
+                <div class="col-md-6">
+                    <img src="${product.image}" 
+                         alt="${product.name}" 
+                         class="quick-view-image"
+                         onerror="this.src='https://via.placeholder.com/400x300/f8f9fa/6c757d?text=${encodeURIComponent(product.name)}'">
+                </div>
+                
+                <!-- Información del producto -->
+                <div class="col-md-6">
+                    <div class="quick-view-info">
+                        <span class="quick-view-category">${product.category}</span>
+                        <h4>${product.name}</h4>
+                        <p class="quick-view-description">${product.description}</p>
+                        
+                        <!-- Rating -->
+                        <div class="quick-view-rating">
+                            <div class="quick-view-stars">${starsHTML}</div>
+                            <span class="text-muted">(${product.reviews} reseñas)</span>
+                        </div>
+                        
+                        <!-- Precio -->
+                        <div class="quick-view-price">
+                            <span class="quick-view-current-price">S/. ${product.price.toFixed(2)}</span>
+                            ${hasDiscount ? `
+                                <span class="quick-view-original-price">S/. ${product.originalPrice.toFixed(2)}</span>
+                                <span class="quick-view-discount">-${discountAmount}%</span>
+                            ` : ''}
+                        </div>
+                        
+                        <!-- Stock -->
+                        <div class="stock-info">
+                            <i class="fas fa-box me-2"></i>
+                            <span class="${stockClass}">${stockText}</span>
+                        </div>
+                        
+                        <!-- Selector de cantidad -->
+                        <div class="quantity-selector">
+                            <label for="quantity-${product.id}" class="form-label">Cantidad:</label>
+                            <div class="quantity-controls">
+                                <button type="button" class="quantity-btn" onclick="ProductsModule.changeQuantity(${product.id}, -1)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input type="number" 
+                                       id="quantity-${product.id}" 
+                                       class="quantity-input" 
+                                       value="1" 
+                                       min="1" 
+                                       max="${product.stock}">
+                                <button type="button" class="quantity-btn" onclick="ProductsModule.changeQuantity(${product.id}, 1)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Botón agregar al carrito -->
+                        <button class="btn btn-add-to-cart-modal" 
+                                onclick="ProductsModule.addToCartFromModal(${product.id})"
+                                ${product.stock === 0 ? 'disabled' : ''}>
+                            <i class="fas fa-shopping-cart me-2"></i>
+                            ${product.stock === 0 ? 'Agotado' : 'Agregar al Carrito'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    },
+
+    // Cambiar cantidad en modal
+    changeQuantity(productId, change) {
+        const input = document.getElementById(`quantity-${productId}`);
+        if (input) {
+            let newValue = parseInt(input.value) + change;
+            const max = parseInt(input.getAttribute('max'));
+            const min = parseInt(input.getAttribute('min'));
+
+            if (newValue >= min && newValue <= max) {
+                input.value = newValue;
+            }
+        }
+    },
+
+    // Agregar al carrito desde modal
+    addToCartFromModal(productId) {
+        const product = this.state.products.find(p => p.id === productId);
+        const quantityInput = document.getElementById(`quantity-${productId}`);
+
+        if (product && quantityInput) {
+            const quantity = parseInt(quantityInput.value);
+
+            // Agregar al carrito con cantidad específica
+            for (let i = 0; i < quantity; i++) {
+                LaParadaApp.addToCart(product);
+            }
+
+            // Cerrar modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('quickViewModal'));
+            modal.hide();
+
+            // Mostrar notificación
+            LaParadaApp.showNotification(
+                `${quantity} x ${product.name} agregado${quantity > 1 ? 's' : ''} al carrito`,
+                'success'
+            );
         }
     },
 

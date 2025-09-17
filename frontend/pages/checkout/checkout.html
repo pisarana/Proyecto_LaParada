@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de facturación - Minimarket La Parada</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/checkout.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <div class="brand-container">
+                    <img src="../../assets/images/logo-la-parada.png" 
+                         alt="Logo La Parada" 
+                         class="brand-logo"
+                         onerror="this.style.display='none'">
+                    <span class="brand-text">La Parada</span>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler custom-toggler" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../products/catalog.html">
+                            <i class="fas fa-store me-1"></i> Tienda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../about.html">
+                            <i class="fas fa-users me-1"></i> Nosotros
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../contact.html">
+                            <i class="fas fa-envelope me-1"></i> Contáctanos
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-actions">
+                    <a href="../cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>
+                        <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+                    </a>
+                    <a href="../auth/login.html" class="btn btn-login" id="loginBtn">
+                        <i class="fas fa-user me-1"></i> Iniciar sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="checkout-progress">
+        <div class="container">
+            <div class="progress-steps">
+                <div class="progress-step completed">
+                    <div class="step-number">1</div>
+                    <span class="step-label">Carrito</span>
+                </div>
+                <div class="progress-step active">
+                    <div class="step-number">2</div>
+                    <span class="step-label">Facturación</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-number">3</div>
+                    <span class="step-label">Confirmación</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="checkout-title">Detalles de facturación</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Checkout Form - Left Column -->
+                <div class="col-lg-8">
+                    <div class="checkout-form-container">
+                        <!-- Close Button (igual que en la imagen) -->
+                        <button class="btn-close-checkout" onclick="CheckoutModule.goBack()" title="Volver al carrito">
+                            <i class="fas fa-times"></i>
+                        </button>
+
+                        <form id="checkoutForm" class="checkout-form" novalidate>
+                            <!-- Datos del Cliente -->
+                            <div class="form-section">
+                                <h4 class="section-title">
+                                    <i class="fas fa-user me-2"></i>
+                                    Datos del cliente
+                                </h4>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="nombre" class="form-label">Nombre:</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="nombre" 
+                                               name="nombre"
+                                               placeholder="Ingrese su nombre"
+                                               required>
+                                        <div class="invalid-feedback">
+                                            El nombre es requerido
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="apellido" class="form-label">Apellido:</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="apellido" 
+                                               name="apellido"
+                                               placeholder="Ingrese su apellido"
+                                               required>
+                                        <div class="invalid-feedback">
+                                            El apellido es requerido
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo electrónico:</label>
+                                    <input type="email" 
+                                           class="form-control" 
+                                           id="correo" 
+                                           name="correo"
+                                           placeholder="Ingrese su correo electrónico"
+                                           required>
+                                    <div class="invalid-feedback">
+                                        Ingrese un correo electrónico válido
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Datos de Entrega -->
+                            <div class="form-section">
+                                <h4 class="section-title">
+                                    <i class="fas fa-truck me-2"></i>
+                                    Datos de entrega
+                                </h4>
+                                
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección:</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="direccion" 
+                                           name="direccion"
+                                           placeholder="Ingrese su dirección"
+                                           required>
+                                    <div class="invalid-feedback">
+                                        La dirección es requerida
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <label for="ciudad" class="form-label">Ciudad:</label>
+                                        <select class="form-select" id="ciudad" name="ciudad" required>
+                                            <option value="">Ingrese su ciudad</option>
+                                            <option value="lima">Lima</option>
+                                            <option value="callao">Callao</option>
+                                            <option value="la-victoria">La Victoria</option>
+                                            <option value="san-miguel">San Miguel</option>
+                                            <option value="miraflores">Miraflores</option>
+                                            <option value="san-isidro">San Isidro</option>
+                                            <option value="surco">Surco</option>
+                                            <option value="otros">Otros</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Seleccione una ciudad
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="referencia" class="form-label">Referencia (opcional):</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="referencia" 
+                                               name="referencia"
+                                               placeholder="Ingrese su referencia">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Método de Pago -->
+                            <div class="form-section">
+                                <h4 class="section-title">
+                                    <i class="fas fa-credit-card me-2"></i>
+                                    Método de pago
+                                </h4>
+                                
+                                <!-- Payment Method Selection -->
+                                <div class="payment-method-selection mb-4">
+                                    <div class="payment-option">
+                                        <input type="radio" 
+                                               id="tarjeta" 
+                                               name="metodo_pago" 
+                                               value="tarjeta" 
+                                               checked
+                                               onchange="CheckoutModule.togglePaymentMethod('tarjeta')">
+                                        <label for="tarjeta" class="payment-label">
+                                            <i class="fas fa-credit-card me-2"></i>
+                                            Tarjeta de Crédito/Débito
+                                        </label>
+                                    </div>
+                                    <div class="payment-option">
+                                        <input type="radio" 
+                                               id="paypal" 
+                                               name="metodo_pago" 
+                                               value="paypal"
+                                               onchange="CheckoutModule.togglePaymentMethod('paypal')">
+                                        <label for="paypal" class="payment-label">
+                                            <i class="fab fa-paypal me-2"></i>
+                                            PayPal
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Card Payment Fields -->
+                                <div id="cardPaymentFields" class="card-payment-fields">
+                                    <div class="mb-3">
+                                        <label for="numero_tarjeta" class="form-label">Número de tarjeta:</label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               id="numero_tarjeta" 
+                                               name="numero_tarjeta"
+                                               placeholder="Ej. 1111 1111 1111 1111"
+                                               maxlength="19"
+                                               required>
+                                        <div class="invalid-feedback">
+                                            Ingrese un número de tarjeta válido
+                                        </div>
+                                        <div class="card-icons">
+                                            <i class="fab fa-cc-visa"></i>
+                                            <i class="fab fa-cc-mastercard"></i>
+                                            <i class="fab fa-cc-amex"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="caducidad" class="form-label">Caducidad:</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   id="caducidad" 
+                                                   name="caducidad"
+                                                   placeholder="MM/AA"
+                                                   maxlength="5"
+                                                   required>
+                                            <div class="invalid-feedback">
+                                                Formato: MM/AA
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="cvv" class="form-label">CVV:</label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   id="cvv" 
+                                                   name="cvv"
+                                                   placeholder="Ej. 123"
+                                                   maxlength="4"
+                                                   required>
+                                            <div class="invalid-feedback">
+                                                CVV de 3-4 dígitos
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- PayPal Payment -->
+                                <div id="paypalPaymentFields" class="paypal-payment-fields" style="display: none;">
+                                    <div class="paypal-container">
+                                        <p class="text-muted mb-3">Serás redirigido a PayPal para completar tu pago de forma segura.</p>
+                                        <div id="paypal-button-container">
+                                            <!-- PayPal button se renderiza aquí -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Términos y Condiciones -->
+                            <div class="form-section">
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" 
+                                           type="checkbox" 
+                                           id="terminos_checkout" 
+                                           name="terminos_checkout"
+                                           required>
+                                    <label class="form-check-label" for="terminos_checkout">
+                                        Acepto los <a href="#" class="terms-link" onclick="CheckoutModule.showTerms()">términos y condiciones</a> 
+                                        y la <a href="#" class="terms-link" onclick="CheckoutModule.showPrivacy()">política de privacidad</a>
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        Debe aceptar los términos y condiciones
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="checkout-submit">
+                                <button type="submit" 
+                                        class="btn btn-checkout-submit w-100" 
+                                        id="submitCheckout">
+                                    <span class="submit-text">
+                                        <i class="fas fa-lock me-2"></i>
+                                        Finalizar compra
+                                    </span>
+                                    <span class="submit-loading" style="display: none;">
+                                        <i class="fas fa-spinner fa-spin me-2"></i>
+                                        Procesando...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Order Summary - Right Column -->
+                <div class="col-lg-4">
+                    <div class="order-summary-container">
+                        <div class="order-summary">
+                            <h4 class="summary-title">Resumen del pedido</h4>
+                            
+                            <!-- Items -->
+                            <div class="order-items" id="orderItems">
+                                <!-- Items se cargan dinámicamente -->
+                            </div>
+                            
+                            <!-- Totals -->
+                            <div class="order-totals">
+                                <div class="total-item">
+                                    <span>Subtotal:</span>
+                                    <span id="orderSubtotal">S/. 0.00</span>
+                                </div>
+                                <div class="total-item">
+                                    <span>Envío:</span>
+                                    <span id="orderShipping">S/. 10.00</span>
+                                </div>
+                                <div class="total-item" id="discountRow" style="display: none;">
+                                    <span>Descuento:</span>
+                                    <span id="orderDiscount" class="text-success">-S/. 0.00</span>
+                                </div>
+                                <hr>
+                                <div class="total-item total-final">
+                                    <strong>
+                                        <span>Total:</span>
+                                        <span id="orderTotal">S/. 0.00</span>
+                                    </strong>
+                                </div>
+                            </div>
+
+                            <!-- Security Badge -->
+                            <div class="security-info">
+                                <div class="security-item">
+                                    <i class="fas fa-shield-alt text-success me-2"></i>
+                                    <small>Pago 100% seguro</small>
+                                </div>
+                                <div class="security-item">
+                                    <i class="fas fa-lock text-success me-2"></i>
+                                    <small>Datos protegidos con SSL</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Síguenos</h5>
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Horarios de atención</h5>
+                    <div class="footer-info">
+                        <p><i class="far fa-clock me-2"></i>Domingo a viernes: 7:00 AM a 10:00 PM</p>
+                        <p><i class="far fa-clock me-2"></i>Sábados: 7:00 AM a 11:00 PM</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Ubicación</h5>
+                    <div class="footer-info">
+                        <p><i class="fas fa-map-marker-alt me-2"></i>La Victoria - Lima - Lima</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Número de teléfono</h5>
+                    <div class="footer-info">
+                        <p><i class="fas fa-phone me-2"></i><a href="tel:+5117134160">(01) 7134160</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright">&copy; 2025 Minimarket La Parada. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <p class="dev-credit">Desarrollado por <span class="highlight">Equipo UTP</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Stripe SDK (opcional) -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- PayPal SDK (opcional) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+    <script src="../../js/mock-data.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../../js/modules/checkout.js"></script>
+</body>
+</html>
