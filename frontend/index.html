@@ -1,11 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Minimarket La Parada - Inicio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    
+    <!-- Navbar Principal -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+        <div class="container">
+            <!-- Logo y Marca -->
+            <a class="navbar-brand" href="index.html">
+                <div class="brand-container">
+                    <img src="assets/images/LaParadaLogo.jpg" 
+                         alt="Logo La Parada" 
+                         class="brand-logo"
+                         onerror="this.style.display='none'">
+                    <span class="brand-text">La Parada</span>
+                </div>
+            </a>
+            
+            <!-- Toggle para móviles -->
+            <button class="navbar-toggler custom-toggler" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+                    aria-controls="navbarContent" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Contenido del navbar -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Enlaces de navegación -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn active" href="pages/products/catalog.html">
+                            <i class="fas fa-store me-1"></i> Tienda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="pages/about.html">
+                            <i class="fas fa-users me-1"></i> Nosotros
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="pages/contact.html">
+                            <i class="fas fa-envelope me-1"></i> Contáctanos
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Acciones del usuario -->
+                <div class="navbar-actions">
+                    <a href="pages/cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>
+                        <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+                    </a>
+                    <a href="pages/auth/login.html" class="btn btn-login" id="loginBtn">
+                        <i class="fas fa-user me-1"></i> Iniciar sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Promocional -->
+    <section class="promo-banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-7">
+                    <div class="banner-content">
+                        <h4 class="banner-title">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Cada vez más cerca de ti. Cuatro sucursales.
+                        </h4>
+                        <p class="banner-subtitle">
+                            La Victoria - Surco - Los Olivos - San Luis
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5 text-end">
+                    <a href="pages/products/catalog.html" class="btn btn-cta-banner">
+                        Ver Tienda <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero-main" id="heroSection">
+        <div class="hero-container">
+            <!-- Imagen de fondo del hero -->
+            <div class="hero-background">
+                <img src="assets/images/minimarket-collage.jpg" 
+                     alt="Interior Minimarket La Parada"
+                     class="hero-img"
+                     onerror="this.src='https://via.placeholder.com/1200x500/4CAF50/ffffff?text=Minimarket+La+Parada'">
+                <div class="hero-overlay"></div>
+            </div>
+            
+            <!-- Contenido del hero -->
+            <div class="hero-content">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 text-center">
+                            <h1 class="hero-title animate-fade-in">
+                                Bienvenido al minimarket 
+                                <span class="title-highlight">"La Parada"</span>
+                            </h1>
+                            <p class="hero-description animate-fade-in-delay">
+                                Tienda de comestibles
+                            </p>
+                            <a href="pages/products/catalog.html" 
+                               class="btn btn-hero-cta animate-fade-in-delay-2">
+                                <i class="fas fa-shopping-basket me-2"></i>
+                                Explorar Productos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Productos Destacados Mejorados -->
+<section class="featured-section" id="featuredProducts">
+    <div class="container-fluid"> <!-- Cambiado a container-fluid para usar toda la pantalla -->
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Los productos más vendidos</h2>
+                <p class="section-subtitle">Descubre nuestros productos más populares con los mejores precios</p>
+                <div class="title-separator"></div>
+            </div>
+        </div>
+        
+        <!-- Loading spinner -->
+        <div class="loading-container text-center" id="productsLoading">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando productos...</span>
+            </div>
+        </div>
+        
+        <!-- Contenedor de productos - Ahora usa container-fluid -->
+        <div class="container">
+            <div class="row products-grid justify-content-center" id="productsContainer">
+                <!-- Los productos se cargan dinámicamente -->
+            </div>
+        </div>
+        
+        <!-- Botón ver más -->
+        <div class="container">
+            <div class="text-center mt-5">
+                <a href="pages/products/catalog.html" class="btn btn-view-more">
+                    <i class="fas fa-th-large me-2"></i>
+                    Ver Todos los Productos
+                    <span class="badge bg-light text-dark ms-2">+100 productos</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row">
+                <!-- Redes Sociales -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Síguenos</h5>
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link instagram" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link whatsapp" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Horarios -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Horarios de atención</h5>
+                    <div class="footer-info">
+                        <p class="info-item">
+                            <i class="far fa-clock me-2"></i>
+                            Domingo a viernes: 7:00 AM a 10:00 PM
+                        </p>
+                        <p class="info-item">
+                            <i class="far fa-clock me-2"></i>
+                            Sábados: 7:00 AM a 11:00 PM
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Ubicación -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Ubicación</h5>
+                    <div class="footer-info">
+                        <p class="info-item">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            La Victoria - Lima - Lima
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Contacto -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Contacto</h5>
+                    <div class="footer-info">
+                        <p class="info-item">
+                            <i class="fas fa-phone me-2"></i>
+                            <a href="tel:+5117134160" class="footer-link">(01) 7134160</a>
+                        </p>
+                        <p class="info-item">
+                            <i class="fas fa-envelope me-2"></i>
+                            <a href="mailto:marketing@corpdevalle.com.pe" class="footer-link">
+                                marketing@corpdevalle.com.pe
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright">
+                            &copy; 2025 Minimarket La Parada. Todos los derechos reservados.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <p class="dev-credit">
+                            Desarrollado por <span class="highlight">Equipo UTP</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Scroll to Top -->
+    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/modules/products.js"></script>
 </body>
 </html>
