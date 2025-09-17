@@ -1,244 +1,331 @@
-# 🛒 Minimarket La Parada - Sistema Web
+# 🛍️ Minimarket La Parada - Frontend
 
-> **Desarrollo e implementación de una página web para el minimarket La Parada**
+> **Sistema de E-commerce completo para el Minimarket La Parada desarrollado con HTML5, CSS3 y JavaScript puro.**
 
-Sistema de comercio electrónico completo que moderniza los procesos de venta del minimarket La Parada, permitiendo a los clientes realizar compras online de manera rápida, segura y eficiente.
+[![GitHub Pages](https://img.shields.io/badge/GitHub%https://github.com/usuarioimg.shields.io/badge/HTML5-E34F26?style=flat&logo=html5developer.mozilla.org/en-US/docsimg.shields.io/badge/CSS3-1572B6?style=flat&logo=css3developer.mozilla.org/en-https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logohttps://developer.mozilla.org/
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=bootstrap&logoColor 📋 Tabla de Contenidos
 
----
+- [🌟 Características](#-características)
+- [🖥️ Demo](#️-demo)
+- [🏗️ Estructura del Proyecto](#️-estructura-del-proyecto)
+- [🚀 Instalación y Uso](#-instalación-y-uso)
+- [📱 Páginas Implementadas](#-páginas-implementadas)
+- [🎨 Tecnologías](#-tecnologías)
+- [⚙️ Funcionalidades](#️-funcionalidades)
+- [📱 Responsive Design](#-responsive-design)
+- [🔧 Configuración](#-configuración)
+- [👥 Equipo de Desarrollo](#-equipo-de-desarrollo)
+- [📄 Licencia](#-licencia)
 
-## 📋 Tabla de Contenidos
+## 🌟 Características
 
-1. [Descripción del Proyecto](#-descripción-del-proyecto)
-2. [Características Principales](#-características-principales)
-3. [Tecnologías Utilizadas](#-tecnologías-utilizadas)
-4. [Estructura del Proyecto](#-estructura-del-proyecto)
-5. [Instalación y Configuración](#-instalación-y-configuración)
-6. [Uso](#-uso)
-7. [Equipo de Desarrollo](#-equipo-de-desarrollo)
-8. [Cronograma](#-cronograma)
-9. [Contribución](#-contribución)
-10. [Licencia](#-licencia)
+- ✅ **E-commerce completo** con carrito de compras funcional
+- ✅ **Diseño responsive** optimizado para móviles y desktop
+- ✅ **Sistema de autenticación** con roles (usuario/administrador)
+- ✅ **Gestión de productos** por categorías
+- ✅ **Búsqueda y filtrado** avanzado de productos
+- ✅ **Carrito persistente** con localStorage
+- ✅ **Checkout completo** con integración para pagos
+- ✅ **Panel administrativo** para gestión de productos
+- ✅ **Optimizado para GitHub Pages**
+- ✅ **Preparado para backend** (Java Spring Boot)
 
----
+## 🖥️ Demo
 
-## 🎯 Descripción del Proyecto
+🌐 **[Ver Demo en Vivo](https://usuario.github.io/minimarket-la-parada/frontend/)**
 
-El minimarket La Parada enfrenta desafíos competitivos por la ausencia de presencia digital. Este proyecto desarrolla una **plataforma web dinámica** que:
-
-- Mejora la experiencia de compra de los clientes
-- Optimiza los procesos de venta
-- Incrementa la competitividad en el mercado digital
-- Moderniza la gestión de inventario
-
-### Estado del Proyecto
-🚧 **En Desarrollo** - Fase de implementación activa
-
----
-
-## ✨ Características Principales
-
-### Para Clientes
-- ✅ **Registro e inicio de sesión** seguro
-- ✅ **Catálogo digital** organizado por categorías  
-- ✅ **Sistema de búsqueda** con filtros avanzados
-- ✅ **Carrito de compras** funcional
-- ✅ **Procesamiento de pedidos** online
-- ✅ **Notificaciones** de compra automáticas
-- ✅ **Formulario de contacto** integrado
-
-### Para Administradores
-- ✅ **Panel de administración** completo
-- ✅ **Gestión de productos** (CRUD)
-- ✅ **Control de inventario**
-- ✅ **Gestión de pedidos**
-
----
-
-## 🛠 Tecnologías Utilizadas
-
-### Frontend
-- **HTML5** - Estructura semántica
-- **CSS3** - Estilos y diseño responsivo
-- **JavaScript ES6+** - Funcionalidad interactiva
-- **Bootstrap 5** - Framework de diseño
-
-### Backend  
-- **Java 17** - Lenguaje de programación
-- **Spring Boot 3.x** - Framework principal
-- **Spring Security** - Autenticación y autorización
-- **Spring Data JPA** - Persistencia de datos
-
-### Base de Datos
-- **MySQL 8.0** - Sistema de gestión de base de datos
-
-### Herramientas de Desarrollo
-- **Maven** - Gestión de dependencias
-- **Docker** - Contenedorización
-- **Git** - Control de versiones
-
----
-
-## 📁 Estructura del Proyecto
+### Credenciales de Prueba:
 
 ```
-minimarket-la-parada/
-├── 📁 backend/           # API REST con Spring Boot
-├── 📁 frontend/          # Interfaz web del usuario
-├── 📁 database/          # Scripts SQL y migraciones
-├── 📁 docs/              # Documentación del proyecto
-├── 📁 deployment/        # Configuración de despliegue
-├── 📁 testing/           # Datos de prueba y testing
-├── 📄 README.md          # Este archivo
-├── 📄 .gitignore         # Archivos ignorados por Git
-└── 📄 docker-compose.yml # Configuración de contenedores
+👤 Usuario Normal:
+Email: user@laparada.com
+Password: user123
+
+🛡️ Administrador:
+Email: admin@laparada.com
+Password: admin123
 ```
 
----
+## 🏗️ Estructura del Proyecto
 
-## 🚀 Instalación y Configuración
-
-### Prerrequisitos
-- Java 17 o superior
-- Node.js 16 o superior
-- MySQL 8.0
-- Git
-- Docker (opcional)
-
-### Configuración Local
-
-1. **Clonar el repositorio**
 ```
-git clone https://github.com/tu-usuario/minimarket-la-parada.git
+frontend/
+├── 📁 pages/                    # Páginas HTML
+│   ├── 📁 products/            # Catálogo y productos
+│   │   ├── catalog.html        # Catálogo principal
+│   │   ├── categories.html     # Página de categorías
+│   │   └── detail.html         # Detalle de producto
+│   ├── 📁 cart/               # Carrito de compras
+│   │   └── cart.html          # Página del carrito
+│   ├── 📁 checkout/           # Proceso de compra
+│   │   └── checkout.html      # Detalles de facturación
+│   ├── 📁 auth/               # Autenticación
+│   │   └── login.html         # Página de login
+│   ├── 📁 admin/              # Panel administrativo
+│   │   └── dashboard.html     # Dashboard del admin
+│   ├── about.html             # Página "Nosotros"
+│   └── contact.html           # Página de contacto
+├── 📁 css/                    # Hojas de estilo
+│   ├── style.css              # Estilos principales
+│   ├── catalog.css            # Estilos del catálogo
+│   ├── cart.css               # Estilos del carrito
+│   ├── checkout.css           # Estilos del checkout
+│   └── admin-dashboard.css    # Estilos del panel admin
+├── 📁 js/                     # JavaScript
+│   ├── 📁 modules/            # Módulos JavaScript
+│   │   ├── products.js        # Gestión de productos
+│   │   ├── catalog.js         # Funcionalidad del catálogo
+│   │   ├── cart.js            # Carrito de compras
+│   │   ├── checkout.js        # Proceso de checkout
+│   │   ├── auth.js            # Autenticación
+│   │   └── admin-dashboard.js # Panel administrativo
+│   ├── app.js                 # Aplicación principal
+│   └── mock-data.js           # Datos de prueba
+├── 📁 assets/                 # Recursos estáticos
+│   └── 📁 images/             # Imágenes
+│       ├── LaParadaLogo.jpg   # Logo principal
+│       └── favicon.ico        # Icono del sitio
+└── index.html                 # Página principal
+```
+
+## 🚀 Instalación y Uso
+
+### 1. **Desarrollo Local**
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/usuario/minimarket-la-parada.git
+
+# Navegar al directorio
 cd minimarket-la-parada
+
+# Abrir con Live Server (VS Code) o servidor local
+# Ejemplo con Python:
+python -m http.server 3000
+
+# Acceder en el navegador:
+http://localhost:3000/frontend/
 ```
 
-2. **Configurar Base de Datos**
-```
-# Ejecutar scripts de la base de datos
-mysql -u root -p < database/scripts/01_create_database.sql
-mysql -u root -p < database/scripts/02_create_tables.sql
+### 2. **Despliegue en GitHub Pages**
+
+```bash
+# Subir cambios
+git add .
+git commit -m "Deploy to GitHub Pages"
+git push origin main
+
+# Configurar GitHub Pages en el repositorio:
+# Settings > Pages > Source: Deploy from branch > main
 ```
 
-3. **Configurar Backend**
-```
-cd backend
-# Configurar application.properties con tus credenciales de BD
-mvn clean install
-mvn spring-boot:run
-```
+### 3. **Configuración de Rutas**
 
-4. **Configurar Frontend**
-```
-cd frontend
-# Abrir index.html en tu navegador
-# O usar un servidor local como Live Server
+Para **GitHub Pages**, todas las rutas ya están configuradas con `/frontend/`:
+
+```html
+<!-- Configuración automática para GitHub Pages -->
+<base href="/frontend/">
+<link href="css/style.css" rel="stylesheet">
+<a href="pages/auth/login.html">Login</a>
 ```
 
-### Usando Docker (Recomendado)
+## 📱 Páginas Implementadas
+
+| Página | Ruta | Descripción |
+|--------|------|-------------|
+| 🏠 **Inicio** | `/index.html` | Página principal con productos destacados |
+| 🛍️ **Catálogo** | `/pages/products/catalog.html` | Catálogo completo con filtros |
+| 📂 **Categorías** | `/pages/products/categories.html` | Navegación por categorías |
+| 📦 **Producto** | `/pages/products/detail.html?id=X` | Detalle individual de producto |
+| 🛒 **Carrito** | `/pages/cart/cart.html` | Carrito de compras |
+| 💳 **Checkout** | `/pages/checkout/checkout.html` | Proceso de compra |
+| 👤 **Login** | `/pages/auth/login.html` | Autenticación |
+| ⚙️ **Admin** | `/pages/admin/dashboard.html` | Panel administrativo |
+| ℹ️ **Nosotros** | `/pages/about.html` | Información de la empresa |
+| 📞 **Contacto** | `/pages/contact.html` | Formulario de contacto |
+
+## 🎨 Tecnologías
+
+### **Frontend Core**
+- ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=htmlHTML5** - Estructura semántica
+- ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logo - Estilos y animaciones
+- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript ES6+** - Funcionalidad dinámica
+
+### **Frameworks y Librerías**
+- ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=bootstrap 5.3.2** - Framework CSS responsive
+- ![Font Awesome](https://img.shields.io/badge/Font%20Awesome-528DD7?style=flat&logo=fontawesome&logoColor 6.4.0** - Iconografía
+- **Google Fonts (Poppins)** - Tipografía moderna
+
+### **Herramientas de Desarrollo**
+- ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor= versiones
+- ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor** - Hosting gratuito
+- **VS Code** - Editor recomendado
+
+## ⚙️ Funcionalidades
+
+### 🛍️ **Sistema de E-commerce**
+- **Catálogo de productos** con imágenes y descripciones
+- **Sistema de categorías** (Bebidas, Lácteos, Carnes, etc.)
+- **Búsqueda y filtrado** por nombre, categoría y precio
+- **Vista rápida** de productos con modal
+- **Carrito persistente** con localStorage
+- **Cálculo automático** de totales y envío
+
+### 👤 **Gestión de Usuarios**
+- **Sistema de login** con roles diferenciados
+- **Autenticación mock** para desarrollo
+- **Sesiones persistentes** con localStorage
+- **Redirección automática** según rol de usuario
+
+### 💳 **Proceso de Compra**
+- **Checkout completo** con validación de formularios
+- **Múltiples métodos de pago** (Tarjeta, PayPal)
+- **Validación de campos** en tiempo real
+- **Preparado para APIs** de pago (Stripe, PayPal)
+- **Cálculo de impuestos** y costos de envío
+
+### 🛡️ **Panel Administrativo**
+- **Dashboard de estadísticas** del negocio
+- **Gestión de productos** (Agregar, Ver, Eliminar)
+- **Control de inventario** y stock
+- **Gestión de pagos** y pedidos
+- **Acceso restringido** solo para administradores
+
+### 📱 **Experiencia de Usuario**
+- **Diseño responsive** para todos los dispositivos
+- **Navegación intuitiva** con breadcrumbs
+- **Animaciones suaves** y transiciones
+- **Feedback visual** con notificaciones
+- **Optimización SEO** con meta tags dinámicos
+
+## 📱 Responsive Design
+
+El proyecto está **completamente optimizado** para diferentes dispositivos:
+
+### 📱 **Mobile First** (320px - 767px)
+- Navegación colapsable
+- Cards apiladas verticalmente
+- Botones táctiles optimizados
+- Imágenes responsivas
+
+### 💻 **Tablet** (768px - 1023px)
+- Layout de 2 columnas
+- Menú horizontal
+- Tarjetas en grid flexible
+
+### 🖥️ **Desktop** (1024px+)
+- Layout completo de 3-4 columnas
+- Sidebar fijo en páginas de catálogo
+- Hover effects avanzados
+- Navegación completa visible
+
+## 🔧 Configuración
+
+### **Variables CSS Personalizables**
+
+```css
+:root {
+    --primary-green: #8BC34A;
+    --primary-green-light: #9CCC65;
+    --primary-green-dark: #689F38;
+    --warning-yellow: #FFC107;
+    --text-dark: #212529;
+    --text-light: #6c757d;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --transition-fast: 0.15s ease-in-out;
+    --transition-normal: 0.3s ease-in-out;
+}
 ```
-docker-compose up -d
+
+### **Configuración de API**
+
+```javascript
+// js/mock-data.js
+const ApiConfig = {
+    mode: 'mock', // Cambiar a 'real' para backend
+    baseURL: 'http://localhost:8080/api',
+    endpoints: {
+        products: '/productos',
+        categories: '/categorias',
+        cart: '/carrito',
+        auth: '/auth'
+    }
+};
 ```
 
----
+### **Datos Mock Incluidos**
 
-## 💻 Uso
+- **15 productos** de ejemplo con todas las categorías
+- **6 categorías** predefinidas (Bebidas, Lácteos, etc.)
+- **Sistema de usuarios** con roles
+- **Datos de prueba** para carrito y checkout
 
-### Acceso al Sistema
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8080
-- **Base de Datos**: localhost:3306
+## 🌟 Características Avanzadas
 
-### Credenciales de Prueba
-- **Admin**: admin@laparada.com / admin123
-- **Usuario**: cliente@test.com / cliente123
+### **Optimizaciones**
+- ⚡ **Lazy loading** de imágenes
+- 🗜️ **Código minificado** y optimizado
+- 📦 **Módulos JavaScript** organizados
+- 🎨 **CSS custom properties** para temas
+- 🔄 **Sincronización** automática del carrito
 
-### Endpoints Principales
-```
-GET  /api/products        # Listar productos
-POST /api/auth/login      # Iniciar sesión
-POST /api/cart/add        # Agregar al carrito
-POST /api/orders          # Crear pedido
-```
+### **Compatibilidad**
+- ✅ **Navegadores modernos** (Chrome, Firefox, Safari, Edge)
+- ✅ **Dispositivos móviles** (iOS, Android)
+- ✅ **Accesibilidad** básica (ARIA labels, contraste)
+- ✅ **PWA ready** (preparado para Service Workers)
 
----
+### **Preparado para Integración**
+- 🔌 **APIs REST** definidas y documentadas
+- 🗄️ **Base de datos** esquematizada
+- 🔐 **Autenticación JWT** preparada
+- 💳 **Pasarelas de pago** configurables
 
 ## 👥 Equipo de Desarrollo
 
-| Rol | Nombre | Responsabilidad |
-|-----|--------|----------------|
-| **Jefe de Proyecto** | Jheremy James Panizo De Tomas | Coordinación y base de datos |
-| **Desarrollador Backend** | Jose Antonio Beraun Ramos | API y lógica de negocio |
-| **Desarrollador Backend** | Misael Fernando Challco | Autenticación y seguridad |
-| **Desarrollador Frontend** | Liberato Robin Illia Menacho Perez | Interfaz de usuario |
-| **Analista/QA** | Luis Huayllacayan Zuta | Análisis y testing |
+### **Desarrolladores Frontend**
+- **Jheremy James Panizo De Tomas** - *Líder del Proyecto*
+- **Liberato Robin Illia Menacho Perez** - *Desarrollador UI/UX*
+- **Jose Antonio Beraun Ramos** - *Desarrollador JavaScript*
+- **Misael Fernando Challco** - *Desarrollador de Componentes*
+- **Luis Huayllacayan Zuta** - *Desarrollador de Integración*
 
----
+### **Universidad**
+🏫 **Universidad Tecnológica del Perú (UTP)**  
+📚 **Carrera:** Ingeniería de Sistemas e Informática  
+📅 **Año:** 2025
 
-## 📅 Cronograma
+## 🎯 Próximas Mejoras
 
-| Fase | Responsable | Fecha Programada | Estado |
-|------|-------------|------------------|--------|
-| Diseño de interfaz web | Illia | 04/09/2025 | ✅ Completado |
-| Módulo de autenticación | Misael | 06/09/2025 | 🚧 En progreso |
-| Carrito de compras | Luis | 17/09/2025 | ⏳ Pendiente |
-| Catálogo de productos | Jose | 25/09/2025 | ⏳ Pendiente |
-| Base de datos | James | 29/09/2025 | ⏳ Pendiente |
-
-**Fecha de entrega**: 29 de Noviembre, 2025
-
----
-
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -m 'Añadir nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Abre un Pull Request
-
-### Estándares de Código
-- Seguir convenciones de Java para backend
-- Usar nomenclatura clara en JavaScript
-- Documentar funciones importantes
-- Mantener código limpio y comentado
-
----
-
-## 📊 Requerimientos del Sistema
-
-### Funcionales
-- [x] RF1: Sistema de registro e inicio de sesión
-- [x] RF2: Catálogo de productos por categorías
-- [x] RF3: Sistema de búsqueda con filtros
-- [x] RF4: Carrito de compras funcional
-- [x] RF5: Procesamiento de pedidos online
-- [x] RF6: Sistema de notificaciones
-- [x] RF7: Panel de administración
-- [x] RF8: Formulario de contacto
-
-### No Funcionales
-- **Performance**: Tiempo de carga < 3 segundos
-- **Compatibilidad**: Navegadores modernos y dispositivos móviles
-- **Disponibilidad**: 24/7 según infraestructura de hosting
-- **Usabilidad**: Interfaz intuitiva y responsiva
-
----
+- [ ] **Backend Spring Boot** completo
+- [ ] **Base de datos MySQL** integrada
+- [ ] **Sistema de reviews** de productos
+- [ ] **Chat en vivo** con soporte
+- [ ] **Notificaciones push**
+- [ ] **Modo oscuro** opcional
+- [ ] **Multi-idioma** (Español/Inglés)
+- [ ] **PWA completa** con offline support
 
 ## 📞 Contacto
 
-**Minimarket La Parada**
-- Email: contacto@laparada.com
-- Teléfono: +51 XXX XXX XXX
+### **Minimarket La Parada**
+📍 **Dirección:** La Victoria - Lima - Lima  
+📞 **Teléfono:** (01) 7134160  
+📧 **Email:** marketing@corpdevalle.com.pe  
+🕒 **Horarios:** Lun-Vie 7:00-22:00, Sáb 7:00-23:00  
 
-**Equipo de Desarrollo**
-- Email: equipo.laparada@gmail.com
-
----
+### **Soporte Técnico**
+💬 **Issues:** [GitHub Issues](https://github.com/usuario/minimarket-la-parada/issues)  
+📧 **Email:** equipo.utp@gmail.com  
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la **Licencia MIT**. Ver el archivo [LICENSE](LICENSE) para más detalles.
 
----
-
-
+***
