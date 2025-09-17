@@ -269,7 +269,7 @@ const AdminModule = {
             
             // Redirigir al login
             setTimeout(() => {
-                window.location.href = '../auth/login.html';
+                window.location.href = '/frontend/pages/auth/login.html';
             }, 1500);
         }
     },
@@ -277,7 +277,7 @@ const AdminModule = {
     // Redirigir al login
     redirectToLogin() {
         alert('Debes iniciar sesión como administrador para acceder a este panel.');
-        window.location.href = '../auth/login.html';
+        window.location.href = '/frontend/pages/auth/login.html';
     }
 };
 

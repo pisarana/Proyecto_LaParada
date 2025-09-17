@@ -89,11 +89,11 @@ const AuthModule = {
 
             const loginResult = await this.authenticateUser(credentials);
 
-            if (loginResult.success) {
-                this.handleLoginSuccess(loginResult.user);
-            } else {
-                this.showMessage(loginResult.message, 'danger');
-            }
+            // if (loginResult.success) {
+            //     this.handleLoginSuccess(loginResult.user);
+            // } else {
+            //     this.showMessage(loginResult.message, 'danger');
+            // }
 
         } catch (error) {
             console.error('Login error:', error);
@@ -326,7 +326,7 @@ const AuthModule = {
                 button.classList.remove('btn-user-logged');
                 button.classList.add('btn-login');
                 button.onclick = null;
-                button.href = 'pages/auth/login.html';
+                button.href = '/frontend/pages/auth/login.html';
             }
         });
 

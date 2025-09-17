@@ -117,7 +117,7 @@ const App = {
             '#loginBtn',
             '.btn-login',
             '[data-login-btn]',
-            'a[href*="login.html"]'
+            'a[href*="/frontend/pages/auth/login.html"]'
         ];
 
         const loginButtons = document.querySelectorAll(selectors.join(', '));
@@ -171,9 +171,9 @@ const App = {
             // Restaurar href según la página actual
             const currentPath = window.location.pathname;
             if (currentPath.includes('/pages/')) {
-                button.href = 'auth/login.html';
+                button.href = '/frontend/pages/auth/login.html';
             } else {
-                button.href = 'pages/auth/login.html';
+                button.href = '/frontend/pages/auth/login.html';
             }
 
             // Remover evento onclick

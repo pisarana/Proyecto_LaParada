@@ -147,7 +147,7 @@ const RegisterModule = {
 
         // Redirigir a login después de 3 segundos
         setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = '/frontend/pages/auth/login.html';
         }, 3000);
     },
 
