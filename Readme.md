@@ -2,7 +2,9 @@
 
 > **Sistema de E-commerce completo para el Minimarket La Parada desarrollado con HTML5, CSS3 y JavaScript puro.**
 
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5developer.mozilla.org/en-US/docsimg.shields.io/badge/CSS3-1572B6?style=flat&logo=css3developer.mozilla.org/en-https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logo.mozilla.org/en-US/docs/Web://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=bootstrap& 📋 Tabla de Contenidos
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white(https://developer.mozilla
+![HTML5]https://img.shields.io/badge/CSS3-1572B6?style=flat&logo(https://developer.mozilla
+(httpshttps://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logo(https://developer.mozilla.org/en-US/docs/Web/JavaScripthttps://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=bootstrap&logoColor(https://getbootstrap.com de Contenidos
 
 - [🌟 Características](#-características)
 - [🏗️ Estructura del Proyecto](#️-estructura-del-proyecto)
