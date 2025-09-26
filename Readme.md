@@ -315,26 +315,3 @@ Este proyecto está desarrollado como **proyecto académico** para la Universida
 **Uso Comercial:** Requiere autorización del equipo de desarrollo.
 
 ***
-
-### 🌟 **¿Te gusta el proyecto?**
-
-Si este proyecto te ha sido útil para aprender desarrollo frontend:
-- ⭐ **Compártelo** con otros estudiantes
-- 🐛 **Reporta errores** para mejorarlo
-- 💡 **Sugiere mejoras** o nuevas funcionalidades
-- 📚 **Úsalo como referencia** en tus propios proyectos
-
-***
-
-**Desarrollado con ❤️ por el Equipo UTP - Ingeniería de Sistemas 2025**
-
-[1](https://github.com/topics/ecommerce-frontend)
-[2](https://github.com/Drako01/e-commerce-market)
-[3](https://github.com/CodeSystem2022/Ecommerce-GonzaloQuiroga)
-[4](https://www.youtube.com/watch?v=8TpHvDR_PXQ)
-[5](https://github.com/Gonzadeveloper/Proyecto-E-Commerce)
-[6](https://www.youtube.com/watch?v=RiB4mV3VnRY)
-[7](https://www.youtube.com/watch?v=nlDDOOLnDZw)
-[8](https://github.com/CodeSystem2022/e-commerce-los-borbocoders)
-[9](https://www.youtube.com/watch?v=adK1luWFx6o)
-[10](https://github.com/pabloencina/e-commerce-react)
