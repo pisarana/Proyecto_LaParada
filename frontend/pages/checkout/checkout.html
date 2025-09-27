@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de facturación - Minimarket La Parada</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- CSS personalizado -->
     <link href="../../css/style.css" rel="stylesheet">
     <link href="../../css/checkout.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
         <div class="container">
             <a class="navbar-brand" href="../../index.html">
                 <div class="brand-container">
-                    <img src="../../assets/images/LaParadaLogo.jpg" 
-                         alt="Logo La Parada" 
-                         class="brand-logo"
-                         onerror="this.style.display='none'">
+                    <img src="../../assets/images/LaParadaLogo.jpg" alt="Logo La Parada" class="brand-logo"
+                        onerror="this.style.display='none'">
                     <span class="brand-text">La Parada</span>
                 </div>
             </a>
-            
-            <button class="navbar-toggler custom-toggler" type="button" 
-                    data-bs-toggle="collapse" data-bs-target="#navbarContent">
+
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -55,7 +56,7 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 <div class="navbar-actions">
                     <a href="../cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
                         <i class="fas fa-shopping-cart me-1"></i>
@@ -114,42 +115,30 @@
                                     <i class="fas fa-user me-2"></i>
                                     Datos del cliente
                                 </h4>
-                                
+
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="nombre" class="form-label">Nombre:</label>
-                                        <input type="text" 
-                                               class="form-control" 
-                                               id="nombre" 
-                                               name="nombre"
-                                               placeholder="Ingrese su nombre"
-                                               required>
+                                        <input type="text" class="form-control" id="nombre" name="nombre"
+                                            placeholder="Ingrese su nombre" required>
                                         <div class="invalid-feedback">
                                             El nombre es requerido
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="apellido" class="form-label">Apellido:</label>
-                                        <input type="text" 
-                                               class="form-control" 
-                                               id="apellido" 
-                                               name="apellido"
-                                               placeholder="Ingrese su apellido"
-                                               required>
+                                        <input type="text" class="form-control" id="apellido" name="apellido"
+                                            placeholder="Ingrese su apellido" required>
                                         <div class="invalid-feedback">
                                             El apellido es requerido
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label for="correo" class="form-label">Correo electrónico:</label>
-                                    <input type="email" 
-                                           class="form-control" 
-                                           id="correo" 
-                                           name="correo"
-                                           placeholder="Ingrese su correo electrónico"
-                                           required>
+                                    <input type="email" class="form-control" id="correo" name="correo"
+                                        placeholder="Ingrese su correo electrónico" required>
                                     <div class="invalid-feedback">
                                         Ingrese un correo electrónico válido
                                     </div>
@@ -162,20 +151,16 @@
                                     <i class="fas fa-truck me-2"></i>
                                     Datos de entrega
                                 </h4>
-                                
+
                                 <div class="mb-3">
                                     <label for="direccion" class="form-label">Dirección:</label>
-                                    <input type="text" 
-                                           class="form-control" 
-                                           id="direccion" 
-                                           name="direccion"
-                                           placeholder="Ingrese su dirección"
-                                           required>
+                                    <input type="text" class="form-control" id="direccion" name="direccion"
+                                        placeholder="Ingrese su dirección" required>
                                     <div class="invalid-feedback">
                                         La dirección es requerida
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-8 mb-3">
                                         <label for="ciudad" class="form-label">Ciudad:</label>
@@ -196,11 +181,8 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="referencia" class="form-label">Referencia (opcional):</label>
-                                        <input type="text" 
-                                               class="form-control" 
-                                               id="referencia" 
-                                               name="referencia"
-                                               placeholder="Ingrese su referencia">
+                                        <input type="text" class="form-control" id="referencia" name="referencia"
+                                            placeholder="Ingrese su referencia">
                                     </div>
                                 </div>
                             </div>
@@ -211,27 +193,20 @@
                                     <i class="fas fa-credit-card me-2"></i>
                                     Método de pago
                                 </h4>
-                                
+
                                 <!-- Payment Method Selection -->
                                 <div class="payment-method-selection mb-4">
                                     <div class="payment-option">
-                                        <input type="radio" 
-                                               id="tarjeta" 
-                                               name="metodo_pago" 
-                                               value="tarjeta" 
-                                               checked
-                                               onchange="CheckoutModule.togglePaymentMethod('tarjeta')">
+                                        <input type="radio" id="tarjeta" name="metodo_pago" value="tarjeta" checked
+                                            onchange="CheckoutModule.togglePaymentMethod('tarjeta')">
                                         <label for="tarjeta" class="payment-label">
                                             <i class="fas fa-credit-card me-2"></i>
                                             Tarjeta de Crédito/Débito
                                         </label>
                                     </div>
                                     <div class="payment-option">
-                                        <input type="radio" 
-                                               id="paypal" 
-                                               name="metodo_pago" 
-                                               value="paypal"
-                                               onchange="CheckoutModule.togglePaymentMethod('paypal')">
+                                        <input type="radio" id="paypal" name="metodo_pago" value="paypal"
+                                            onchange="CheckoutModule.togglePaymentMethod('paypal')">
                                         <label for="paypal" class="payment-label">
                                             <i class="fab fa-paypal me-2"></i>
                                             PayPal
@@ -243,13 +218,9 @@
                                 <div id="cardPaymentFields" class="card-payment-fields">
                                     <div class="mb-3">
                                         <label for="numero_tarjeta" class="form-label">Número de tarjeta:</label>
-                                        <input type="text" 
-                                               class="form-control" 
-                                               id="numero_tarjeta" 
-                                               name="numero_tarjeta"
-                                               placeholder="Ej. 1111 1111 1111 1111"
-                                               maxlength="19"
-                                               required>
+                                        <input type="text" class="form-control" id="numero_tarjeta"
+                                            name="numero_tarjeta" placeholder="Ej. 1111 1111 1111 1111" maxlength="19"
+                                            required>
                                         <div class="invalid-feedback">
                                             Ingrese un número de tarjeta válido
                                         </div>
@@ -259,30 +230,20 @@
                                             <i class="fab fa-cc-amex"></i>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label for="caducidad" class="form-label">Caducidad:</label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   id="caducidad" 
-                                                   name="caducidad"
-                                                   placeholder="MM/AA"
-                                                   maxlength="5"
-                                                   required>
+                                            <input type="text" class="form-control" id="caducidad" name="caducidad"
+                                                placeholder="MM/AA" maxlength="5" required>
                                             <div class="invalid-feedback">
                                                 Formato: MM/AA
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="cvv" class="form-label">CVV:</label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   id="cvv" 
-                                                   name="cvv"
-                                                   placeholder="Ej. 123"
-                                                   maxlength="4"
-                                                   required>
+                                            <input type="text" class="form-control" id="cvv" name="cvv"
+                                                placeholder="Ej. 123" maxlength="4" required>
                                             <div class="invalid-feedback">
                                                 CVV de 3-4 dígitos
                                             </div>
@@ -293,7 +254,8 @@
                                 <!-- PayPal Payment -->
                                 <div id="paypalPaymentFields" class="paypal-payment-fields" style="display: none;">
                                     <div class="paypal-container">
-                                        <p class="text-muted mb-3">Serás redirigido a PayPal para completar tu pago de forma segura.</p>
+                                        <p class="text-muted mb-3">Serás redirigido a PayPal para completar tu pago de
+                                            forma segura.</p>
                                         <div id="paypal-button-container">
                                             <!-- PayPal button se renderiza aquí -->
                                         </div>
@@ -304,14 +266,13 @@
                             <!-- Términos y Condiciones -->
                             <div class="form-section">
                                 <div class="form-check mb-4">
-                                    <input class="form-check-input" 
-                                           type="checkbox" 
-                                           id="terminos_checkout" 
-                                           name="terminos_checkout"
-                                           required>
+                                    <input class="form-check-input" type="checkbox" id="terminos_checkout"
+                                        name="terminos_checkout" required>
                                     <label class="form-check-label" for="terminos_checkout">
-                                        Acepto los <a href="#" class="terms-link" onclick="CheckoutModule.showTerms()">términos y condiciones</a> 
-                                        y la <a href="#" class="terms-link" onclick="CheckoutModule.showPrivacy()">política de privacidad</a>
+                                        Acepto los <a href="#" class="terms-link"
+                                            onclick="CheckoutModule.showTerms()">términos y condiciones</a>
+                                        y la <a href="#" class="terms-link"
+                                            onclick="CheckoutModule.showPrivacy()">política de privacidad</a>
                                     </label>
                                     <div class="invalid-feedback">
                                         Debe aceptar los términos y condiciones
@@ -321,9 +282,7 @@
 
                             <!-- Submit Button -->
                             <div class="checkout-submit">
-                                <button type="submit" 
-                                        class="btn btn-checkout-submit w-100" 
-                                        id="submitCheckout">
+                                <button type="submit" class="btn btn-checkout-submit w-100" id="submitCheckout">
                                     <span class="submit-text">
                                         <i class="fas fa-lock me-2"></i>
                                         Finalizar compra
@@ -343,12 +302,12 @@
                     <div class="order-summary-container">
                         <div class="order-summary">
                             <h4 class="summary-title">Resumen del pedido</h4>
-                            
+
                             <!-- Items -->
                             <div class="order-items" id="orderItems">
                                 <!-- Items se cargan dinámicamente -->
                             </div>
-                            
+
                             <!-- Totals -->
                             <div class="order-totals">
                                 <div class="total-item">
@@ -437,12 +396,14 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Stripe SDK (opcional) -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <!-- PayPal SDK (opcional) -->
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
-    <script src="../../js/mock-data.js"></script>
-    <script src="../../js/app.js"></script>
-    <script src="../../js/modules/checkout.js"></script>
+    <script src="../../js/api-client.js"></script>
+    <script src="../../js/auth-manager.js"></script>
+    <script src="../../js/products-fixed.js"></script>
+
+    <script src="../../js/cart-manager.js"></script>
+    <script src="../../js/checkout-manager.js"></script>
+
+    <script src="../../js/main.js"></script>
 </body>
+
 </html>

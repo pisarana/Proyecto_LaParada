@@ -23,3 +23,6 @@ VALUES ('Administrador', 'admin@laparada.com', 'admin123', 'ADMINISTRADOR', true
 
 INSERT INTO users (nombre, email, password, rol, activo, fecha_creacion, fecha_actualizacion) 
 VALUES ('Misael Challco', 'misaelchallco0@gmail.com', 'password123', 'CLIENTE', true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- Contraseñas encriptadas (usando BCryptPasswordEncoder)
+UPDATE users SET password = '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy' WHERE email = 'admin@laparada.com';
+UPDATE users SET password = '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.' WHERE email = 'misaelchallco0@gmail.com';

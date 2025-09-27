@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto - Minimarket La Parada</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- CSS personalizado -->
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/contact.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navbar Principal -->
     <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
@@ -25,21 +28,18 @@
             <!-- Logo y Marca -->
             <a class="navbar-brand" href="../index.html">
                 <div class="brand-container">
-                    <img src="../assets/images/LaParadaLogo.jpg" 
-                         alt="Logo La Parada" 
-                         class="brand-logo"
-                         onerror="this.style.display='none'">
+                    <img src="../assets/images/LaParadaLogo.jpg" alt="Logo La Parada" class="brand-logo"
+                        onerror="this.style.display='none'">
                     <span class="brand-text">La Parada</span>
                 </div>
             </a>
-            
+
             <!-- Toggle para móviles -->
-            <button class="navbar-toggler custom-toggler" type="button" 
-                    data-bs-toggle="collapse" data-bs-target="#navbarContent" 
-                    aria-controls="navbarContent" aria-expanded="false">
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarContent">
                 <!-- Enlaces de navegación -->
@@ -60,7 +60,7 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 <!-- Acciones del usuario -->
                 <div class="navbar-actions">
                     <a href="cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
@@ -88,7 +88,7 @@
                         <p class="contact-subtitle">
                             Nos dedicamos en ayudarte a resolver tus dudas
                         </p>
-                        
+
                         <div class="contact-methods">
                             <div class="contact-method">
                                 <div class="method-icon">
@@ -98,7 +98,7 @@
                                     <p>Mediante el uso del formulario que se muestra en pantalla,</p>
                                 </div>
                             </div>
-                            
+
                             <div class="contact-method">
                                 <div class="method-icon">
                                     <i class="fas fa-at"></i>
@@ -110,13 +110,14 @@
                                     </a>
                                 </div>
                             </div>
-                            
+
                             <div class="contact-method">
                                 <div class="method-icon">
                                     <i class="fas fa-phone"></i>
                                 </div>
                                 <div class="method-content">
-                                    <p>Por otro lado, si quieres una comunicación más directa puedes llamarnos en el siguiente número:</p>
+                                    <p>Por otro lado, si quieres una comunicación más directa puedes llamarnos en el
+                                        siguiente número:</p>
                                     <a href="tel:+5117134919" class="contact-link">
                                         (01) 713-4919
                                     </a>
@@ -125,76 +126,56 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Formulario de Contacto - Lado Derecho -->
                 <div class="col-lg-6">
                     <div class="contact-form-container">
                         <form id="contactForm" class="contact-form" novalidate>
                             <div class="form-group mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" 
-                                       class="form-control" 
-                                       id="nombre" 
-                                       name="nombre"
-                                       placeholder="Ingrese sus nombres"
-                                       required>
+                                <input type="text" class="form-control" id="nombre" name="nombre"
+                                    placeholder="Ingrese sus nombres" required>
                                 <div class="invalid-feedback">
                                     Por favor ingrese su nombre.
                                 </div>
                             </div>
-                            
+
                             <div class="form-group mb-3">
                                 <label for="apellido" class="form-label">Apellido</label>
-                                <input type="text" 
-                                       class="form-control" 
-                                       id="apellido" 
-                                       name="apellido"
-                                       placeholder="Ingrese sus apellidos"
-                                       required>
+                                <input type="text" class="form-control" id="apellido" name="apellido"
+                                    placeholder="Ingrese sus apellidos" required>
                                 <div class="invalid-feedback">
                                     Por favor ingrese su apellido.
                                 </div>
                             </div>
-                            
+
                             <div class="form-group mb-3">
                                 <label for="correo" class="form-label">Correo</label>
-                                <input type="email" 
-                                       class="form-control" 
-                                       id="correo" 
-                                       name="correo"
-                                       placeholder="Ingrese su correo"
-                                       required>
+                                <input type="email" class="form-control" id="correo" name="correo"
+                                    placeholder="Ingrese su correo" required>
                                 <div class="invalid-feedback">
                                     Por favor ingrese un correo válido.
                                 </div>
                             </div>
-                            
+
                             <div class="form-group mb-3">
                                 <label for="asunto" class="form-label">Asunto o motivo de consulta</label>
-                                <input type="text" 
-                                       class="form-control" 
-                                       id="asunto" 
-                                       name="asunto"
-                                       placeholder="Ingrese su motivo de consulta"
-                                       required>
+                                <input type="text" class="form-control" id="asunto" name="asunto"
+                                    placeholder="Ingrese su motivo de consulta" required>
                                 <div class="invalid-feedback">
                                     Por favor ingrese el asunto de su consulta.
                                 </div>
                             </div>
-                            
+
                             <div class="form-group mb-4">
                                 <label for="mensaje" class="form-label">Mensaje</label>
-                                <textarea class="form-control" 
-                                          id="mensaje" 
-                                          name="mensaje" 
-                                          rows="5"
-                                          placeholder="Ingrese la descripción del motivo de consulta"
-                                          required></textarea>
+                                <textarea class="form-control" id="mensaje" name="mensaje" rows="5"
+                                    placeholder="Ingrese la descripción del motivo de consulta" required></textarea>
                                 <div class="invalid-feedback">
                                     Por favor ingrese su mensaje.
                                 </div>
                             </div>
-                            
+
                             <button type="submit" class="btn btn-submit w-100" id="submitBtn">
                                 <span class="btn-text">Enviar</span>
                                 <span class="btn-loading" style="display: none;">
@@ -203,7 +184,7 @@
                                 </span>
                             </button>
                         </form>
-                        
+
                         <!-- Mensaje de respuesta -->
                         <div id="responseMessage" class="response-message" style="display: none;">
                             <div class="alert" role="alert">
@@ -236,7 +217,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Horarios -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Horarios de atención</h5>
@@ -258,7 +239,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Ubicación -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Ubicación</h5>
@@ -269,7 +250,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Contacto -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Número de teléfono</h5>
@@ -281,7 +262,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Copyright -->
             <div class="footer-bottom">
                 <div class="row align-items-center">
@@ -307,7 +288,10 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/app.js"></script>
-    <script src="../js/modules/contact.js"></script>
+    <script src="../js/api-client.js"></script>
+    <script src="../js/auth-manager.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/cart-manager.js"></script>
 </body>
+
 </html>
