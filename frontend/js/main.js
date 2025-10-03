@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentPath.includes('admin') && (!user || user.rol !== 'ADMINISTRADOR')) {
         console.log('❌ Unauthorized access to admin area');
         alert('Acceso denegado. Debes ser administrador.');
-        window.location.href = '../auth/login.html';
+        window.location.href = '/frontend/pages/auth/login.html';
         return;
     }
 

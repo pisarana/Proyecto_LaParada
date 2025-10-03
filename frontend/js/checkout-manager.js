@@ -1,4 +1,7 @@
 // ===== CHECKOUT MANAGER ADAPTADO =====
+
+// ===== GLOBAL FUNCTIONS FOR HTML =====
+const cartLink = '/frontend/pages/cart/cart.html';   // <- una sola verdad
 class CheckoutManager {
     constructor() {
         this.cart = JSON.parse(localStorage.getItem('lp_cart') || '[]');
@@ -35,7 +38,7 @@ class CheckoutManager {
         // Verificar carrito
         if (this.cart.length === 0) {
             alert('Tu carrito está vacío');
-            window.location.href = '../cart/cart.html';
+            window.location.href = cartLink;
             return;
         }
 
@@ -115,28 +118,33 @@ class CheckoutManager {
             const itemTotal = product.precio * item.quantity;
             subtotal += itemTotal;
 
+            // Asegurar ruta absoluta para la imagen
+            const imageUrl = product.imagenUrl.startsWith('/')
+                ? product.imagenUrl
+                : '/' + product.imagenUrl;
+
             return `
-                <div class="order-item d-flex align-items-center py-3 border-bottom">
-                    <img src="${product.imagenUrl || '../../assets/images/productos/default.jpg'}" 
-                         alt="${product.nombre}" 
-                         style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
-                    <div class="ms-3 flex-grow-1">
-                        <h6 class="mb-1">${product.nombre}</h6>
-                        <small class="text-muted">Cantidad: ${item.quantity}</small>
-                        <br>
-                        <small class="text-success fw-bold">S/ ${product.precio} c/u</small>
-                    </div>
-                    <div class="text-end">
-                        <strong class="text-success">S/ ${itemTotal.toFixed(2)}</strong>
-                    </div>
+            <div class="order-item d-flex align-items-center py-3 border-bottom">
+                <img src="${imageUrl}" 
+                     alt="${product.nombre}" 
+                     style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                <div class="ms-3 flex-grow-1">
+                    <h6 class="mb-1">${product.nombre}</h6>
+                    <small class="text-muted">Cantidad: ${item.quantity}</small>
+                    <br>
+                    <small class="text-success fw-bold">S/ ${product.precio} c/u</small>
                 </div>
-            `;
+                <div class="text-end">
+                    <strong class="text-success">S/ ${itemTotal.toFixed(2)}</strong>
+                </div>
+            </div>
+        `;
         }).join('');
 
         itemsContainer.innerHTML = itemsHTML;
 
         // Update totals
-        const shipping = 10.00; // Costo de envío fijo
+        const shipping = 10.00; // Costo fijo de envío
         const total = subtotal + shipping;
 
         if (subtotalElement) subtotalElement.textContent = `S/ ${subtotal.toFixed(2)}`;
@@ -352,10 +360,10 @@ class CheckoutManager {
     }
 }
 
-// ===== GLOBAL FUNCTIONS FOR HTML =====
+
 window.CheckoutModule = {
     goBack: () => {
-        window.location.href = '../cart/cart.html';
+        window.location.href = cartLink;
     },
 
     togglePaymentMethod: (method) => {

@@ -95,45 +95,108 @@ class ProductsManager {
 
     // ===== CREATE PRODUCT CARD =====
     createProductCard(product) {
-        const imageUrl = product.imagenUrl || 'assets/images/productos/default.jpg';
-        const precio = parseFloat(product.precio).toFixed(2);
+        console.log('🃏 Creating card for product:', product);
+        console.log('🖼️ Image field check:', {
+            imagen: product.imagen,
+            imagenUrl: product.imagenUrl,
+            imageUrl: product.imageUrl,
+            image: product.image
+        });
+
+        // ✅ FUNCIÓN MEJORADA PARA MANEJAR RUTAS DUPLICADAS
+        const getImageUrl = (product) => {
+            const imagen = product.imagen || product.imagenUrl || product.imageUrl || product.image;
+
+            console.log('🔍 Original imagen value:', imagen);
+
+            if (!imagen || imagen === null || imagen === undefined || imagen === '') {
+                console.log('⚠️ No image found, using placeholder');
+                return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJQeJyzgAzTEVqXiGe90RGBFhfp_4RcJJMQ&s';
+            }
+
+            // Si ya es una URL completa (HTTP)
+            if (imagen.startsWith('http')) {
+                console.log('✅ Using HTTP image:', imagen);
+                return imagen;
+            }
+
+            // Si ya es una ruta absoluta desde la raíz
+            if (imagen.startsWith('/')) {
+                console.log('✅ Using absolute path:', imagen);
+                return imagen;
+            }
+
+            // ✅ Si ya contiene la ruta completa (empieza con frontend/)
+            if (imagen.startsWith('frontend/')) {
+                const finalPath = '/' + imagen;
+                console.log('✅ Using existing full path:', finalPath);
+                return finalPath;
+            }
+
+            // Si es solo el nombre del archivo
+            const fullPath = '/frontend/assets/images/productos/' + imagen;
+            console.log('✅ Building full path:', fullPath);
+            return fullPath;
+        };
+
+        const imageUrl = getImageUrl(product);
+        const precio = parseFloat(product.precio || 0).toFixed(2);
 
         return `
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card producto-card h-100 shadow-sm">
-                    <div class="card-img-wrapper">
-                        <img src="${imageUrl}" 
-                             class="card-img-top" 
-                             alt="${product.nombre}"
-                             style="height: 200px; object-fit: cover;"
-                             onerror="this.src='assets/images/productos/default.jpg'">
-                        ${product.destacado ? '<div class="badge bg-warning position-absolute top-0 start-0 m-2">Destacado</div>' : ''}
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">${product.nombre}</h5>
-                        <p class="card-text text-muted small">${product.descripcion || 'Producto de calidad'}</p>
-                        <p class="card-text"><small class="text-muted">Categoría: ${product.categoria}</small></p>
-                        
-                        <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="h5 text-primary mb-0">S/ ${precio}</span>
-                                <span class="badge ${product.stock > 0 ? 'bg-success' : 'bg-danger'}">
-                                    Stock: ${product.stock}
-                                </span>
-                            </div>
-                            
-                            <button class="btn btn-primary w-100 ${product.stock === 0 ? 'disabled' : ''}" 
-                                    onclick="PRODUCTS.addToCart(${product.id})"
-                                    ${product.stock === 0 ? 'disabled' : ''}>
-                                <i class="fas fa-cart-plus me-2"></i>
-                                ${product.stock === 0 ? 'Sin Stock' : 'Agregar al Carrito'}
-                            </button>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card producto-card h-100 shadow-sm">
+                <div class="card-img-wrapper">
+                    <img src="${imageUrl}" 
+                         class="card-img-top" 
+                         alt="${this.escapeHtml(product.nombre || 'Producto')}"
+                         style="height: 200px; object-fit: cover;"
+                         onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeJQeJyzgAzTEVqXiGe90RGBFhfp_4RcJJMQ&s'">
+                    ${product.destacado ? '<div class="badge bg-warning position-absolute top-0 start-0 m-2">Destacado</div>' : ''}
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">${this.escapeHtml(product.nombre || 'Sin nombre')}</h5>
+                    <p class="card-text text-muted small">${this.escapeHtml(product.descripcion || 'Producto de calidad')}</p>
+                    <p class="card-text"><small class="text-muted">Categoría: ${this.escapeHtml(product.categoria || 'General')}</small></p>
+                    
+                    <div class="mt-auto">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="h5 text-primary mb-0">S/ ${precio}</span>
+                            <span class="badge ${(product.stock || 0) > 0 ? 'bg-success' : 'bg-danger'}">
+                                Stock: ${product.stock || 0}
+                            </span>
                         </div>
+                        
+                        <button class="btn btn-primary w-100 ${(product.stock || 0) === 0 ? 'disabled' : ''}" 
+                                onclick="PRODUCTS.addToCart(${product.id})"
+                                ${(product.stock || 0) === 0 ? 'disabled' : ''}>
+                            <i class="fas fa-cart-plus me-2"></i>
+                            ${(product.stock || 0) === 0 ? 'Sin Stock' : 'Agregar al Carrito'}
+                        </button>
                     </div>
                 </div>
             </div>
-        `;
+        </div>
+    `;
     }
+
+
+    // ✅ MÉTODO HELPER PARA ESCAPAR HTML
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+
+    // ✅ AGREGAR MÉTODO escapeHtml SI NO EXISTE
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
 
     // ===== ADD TO CART =====
     // ===== ADD TO CART - DELEGADO =====

@@ -10,8 +10,9 @@ class CartManager {
         console.log('🛒 Cart Manager initializing...');
 
         const currentPath = window.location.pathname;
+        const cartLink = '/frontend/pages/cart/cart.html';   // <- una sola verdad
 
-        if (currentPath.includes('cart.html')) {
+        if (currentPath.includes(cartLink)) {
             this.loadCartPage();
         }
 
@@ -219,52 +220,58 @@ class CartManager {
 
             const subtotal = (product.precio * item.quantity).toFixed(2);
 
+            // Usar ruta absoluta para las imágenes almacenadas en el backend
+            const imageUrl = product.imagenUrl.startsWith('/')
+                ? product.imagenUrl
+                : '/' + product.imagenUrl;
+
             return `
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img src="${product.imagenUrl || '../../assets/images/productos/default.jpg'}" 
-                                 alt="${product.nombre}" 
-                                 style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
-                            <div class="ms-3">
-                                <h6 class="mb-0">${product.nombre}</h6>
-                                <small class="text-muted">${product.categoria}</small>
-                            </div>
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="${imageUrl}" 
+                             alt="${product.nombre}" 
+                             style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                        <div class="ms-3">
+                            <h6 class="mb-0">${product.nombre}</h6>
+                            <small class="text-muted">${product.categoria}</small>
                         </div>
-                    </td>
-                    <td class="text-center">
-                        <strong>S/ ${product.precio}</strong>
-                    </td>
-                    <td class="text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <button class="btn btn-sm btn-outline-secondary me-2" 
-                                    onclick="CART.updateQuantity(${item.id}, ${item.quantity - 1})">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <span class="fw-bold mx-2" style="min-width: 30px; text-align: center;">${item.quantity}</span>
-                            <button class="btn btn-sm btn-outline-secondary ms-2" 
-                                    onclick="CART.updateQuantity(${item.id}, ${item.quantity + 1})">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                        <small class="text-muted d-block mt-1">Stock: ${product.stock}</small>
-                    </td>
-                    <td class="text-center">
-                        <strong class="text-success">S/ ${subtotal}</strong>
-                    </td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-outline-danger" 
-                                onclick="CART.removeFromCart(${item.id})"
-                                title="Eliminar producto">
-                            <i class="fas fa-trash"></i>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <strong>S/ ${product.precio}</strong>
+                </td>
+                <td class="text-center">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button class="btn btn-sm btn-outline-secondary me-2" 
+                                onclick="CART.updateQuantity(${item.id}, ${item.quantity - 1})">
+                            <i class="fas fa-minus"></i>
                         </button>
-                    </td>
-                </tr>
-            `;
+                        <span class="fw-bold mx-2" style="min-width: 30px; text-align: center;">${item.quantity}</span>
+                        <button class="btn btn-sm btn-outline-secondary ms-2" 
+                                onclick="CART.updateQuantity(${item.id}, ${item.quantity + 1})">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <small class="text-muted d-block mt-1">Stock: ${product.stock}</small>
+                </td>
+                <td class="text-center">
+                    <strong class="text-success">S/ ${subtotal}</strong>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-outline-danger" 
+                            onclick="CART.removeFromCart(${item.id})"
+                            title="Eliminar producto">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
         }).join('');
 
         container.innerHTML = cartItemsHTML;
     }
+
 
     // ===== RENDER CART SUMMARY =====
     renderCartSummary() {

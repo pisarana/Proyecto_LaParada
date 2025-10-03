@@ -19,13 +19,14 @@
     <!-- CSS personalizado -->
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/about.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 
 <body>
     <!-- Navbar Principal -->
     <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
         <div class="container">
-            <!-- Logo y Marca -->
             <a class="navbar-brand" href="../index.html">
                 <div class="brand-container">
                     <img src="../assets/images/LaParadaLogo.jpg" alt="Logo La Parada" class="brand-logo"
@@ -34,15 +35,12 @@
                 </div>
             </a>
 
-            <!-- Toggle para móviles -->
             <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Contenido del navbar -->
             <div class="collapse navbar-collapse" id="navbarContent">
-                <!-- Enlaces de navegación -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link nav-btn" href="products/catalog.html">
@@ -61,13 +59,12 @@
                     </li>
                 </ul>
 
-                <!-- Acciones del usuario -->
                 <div class="navbar-actions">
                     <a href="cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
                         <i class="fas fa-shopping-cart me-1"></i>
                         <span class="badge bg-danger cart-badge" id="cartCount">0</span>
                     </a>
-                    <a href="auth/login.html" class="btn btn-login" id="loginBtn">
+                    <a href="../pages/auth/login.html" class="btn btn-login" id="loginBtn">
                         <i class="fas fa-user me-1"></i> Iniciar sesión
                     </a>
                 </div>
@@ -75,196 +72,366 @@
         </div>
     </nav>
 
-    <!-- Título Principal -->
-    <section class="page-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="page-title">Acerca de nuestra tienda</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item">
-                                <a href="../index.html">
-                                    <i class="fas fa-home me-1"></i>Inicio
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Nosotros</li>
-                        </ol>
-                    </nav>
+    <!-- Hero Section -->
+    <section class="hero-about">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <div class="hero-text" data-aos="fade-up">
+                            <h1 class="hero-title">Nuestra Historia</h1>
+                            <p class="hero-subtitle">Más de 15 años conectando familias con productos de calidad</p>
+                            <div class="hero-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item">
+                                            <a href="../index.html">
+                                                <i class="fas fa-home me-1"></i>Inicio
+                                            </a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Nosotros</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Sobre Nosotros -->
-    <section class="about-content" id="aboutSection">
+    <!-- Story Section -->
+    <section class="story-section">
         <div class="container">
-            <!-- Información Principal -->
-            <div class="row mb-5">
-                <!-- Sobre Nosotros -->
-                <div class="col-lg-6 mb-4">
-                    <div class="info-card">
-                        <div class="info-header">
-                            <h3 class="info-title">
-                                <i class="fas fa-store text-primary me-3"></i>
-                                Sobre nosotros
-                            </h3>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5" data-aos="fade-right">
+                    <div class="story-content">
+                        <div class="section-badge">
+                            <i class="fas fa-heart me-2"></i>Nuestra Esencia
                         </div>
-                        <div class="info-body">
-                            <p class="info-text">
-                                Somos una tienda ubicada en Lima donde encontrarás la mejor variedad de productos para
-                                tu hogar. Nuestro objetivo es brindarte una experiencia de compra única, ofreciendo
-                                artículos de calidad, a precios accesibles y un servicio cercano pensando en ti y en tu
-                                familia.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Propuesta de Valor -->
-                <div class="col-lg-6 mb-4">
-                    <div class="info-card">
-                        <div class="info-header">
-                            <h3 class="info-title">
-                                <i class="fas fa-rocket text-warning me-3"></i>
-                                Propuesta de valor
-                            </h3>
-                        </div>
-                        <div class="info-body">
-                            <p class="info-text">
-                                Compra de forma rápida y segura desde tu PC o móvil, con acceso a un catálogo
-                                actualizado y promociones exclusivas.
-                            </p>
+                        <h2 class="section-title">Una familia que sirve a familias</h2>
+                        <p class="story-text">
+                            Desde 2010, hemos sido más que un simple minimarket. Somos el lugar donde las familias de
+                            Lima
+                            encuentran todo lo que necesitan para su hogar, con la calidez y confianza que solo una
+                            empresa
+                            familiar puede ofrecer.
+                        </p>
+                        <p class="story-text">
+                            Lo que comenzó como una pequeña tienda en La Victoria, hoy se ha convertido en una cadena de
+                            4
+                            sucursales que siguen el mismo principio: <strong>calidad, precio justo y servicio
+                                excepcional</strong>.
+                        </p>
+                        <div class="story-highlights">
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Productos seleccionados cuidadosamente</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Precios accesibles para todas las familias</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Atención personalizada y cercana</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Misión y Visión -->
-            <div class="row mb-5">
-                <!-- Misión -->
-                <div class="col-lg-6 mb-4">
-                    <div class="info-card mission-card">
-                        <div class="info-header">
-                            <h3 class="info-title">
-                                <i class="fas fa-bullseye text-success me-3"></i>
-                                Misión
-                            </h3>
-                        </div>
-                        <div class="info-body">
-                            <p class="info-text">
-                                Brindar a las familias de Lima una experiencia de compra cercana y confiable, ofreciendo
-                                productos de hogar de calidad, a precios accesibles, y con un servicio personalizado que
-                                haga de cada visita un momento agradable y práctico.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Visión -->
-                <div class="col-lg-6 mb-4">
-                    <div class="info-card vision-card">
-                        <div class="info-header">
-                            <h3 class="info-title">
-                                <i class="fas fa-eye text-info me-3"></i>
-                                Visión
-                            </h3>
-                        </div>
-                        <div class="info-body">
-                            <p class="info-text">
-                                Ser la tienda preferida en Lima para quienes buscan mejorar y equipar su hogar,
-                                destacando por nuestra cercanía, compromiso con el cliente y por convertirnos en un
-                                referente de confianza y calidad.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Imagen de la Tienda -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="store-showcase-about">
-                        <div class="store-image-container">
-                            <img src="../assets/images/tienda-la-parada.jpg" alt="Tienda física La Parada"
-                                class="store-physical-image"
-                                onerror="this.src='https://via.placeholder.com/800x500/4CAF50/ffffff?text=Minimarket+La+Parada'">
-                            <div class="image-overlay">
-                                <div class="overlay-content">
-                                    <h4 class="overlay-title">Visítanos en nuestras sucursales</h4>
-                                    <p class="overlay-text">4 ubicaciones en Lima para servirte mejor</p>
-                                    <div class="locations-list">
-                                        <span class="location-item">
-                                            <i class="fas fa-map-marker-alt me-2"></i>La Victoria
-                                        </span>
-                                        <span class="location-item">
-                                            <i class="fas fa-map-marker-alt me-2"></i>Surco
-                                        </span>
-                                        <span class="location-item">
-                                            <i class="fas fa-map-marker-alt me-2"></i>Los Olivos
-                                        </span>
-                                        <span class="location-item">
-                                            <i class="fas fa-map-marker-alt me-2"></i>San Luis
-                                        </span>
-                                    </div>
+                <div class="col-lg-6 mb-5" data-aos="fade-left">
+                    <div class="story-image-container">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Interior de Minimarket La Parada" class="story-image">
+                        <div class="image-badge">
+                            <div class="badge-content">
+                                <i class="fas fa-award"></i>
+                                <div class="badge-text">
+                                    <strong>15 Años</strong>
+                                    <span>de Experiencia</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- CTA Button -->
+    <!-- Mission & Vision Section -->
+    <section class="mission-vision-section">
+        <div class="container">
             <div class="row">
-                <div class="col-12 text-center mt-5">
-                    <a href="products/categories.html" class="btn btn-cta-categories">
-                        <i class="fas fa-th-large me-2"></i>
-                        EXPLORA NUESTRAS CATEGORÍAS
-                    </a>
-
+                <div class="col-12 text-center mb-5" data-aos="fade-up">
+                    <div class="section-badge">
+                        <i class="fas fa-compass me-2"></i>Nuestros Valores
+                    </div>
+                    <h2 class="section-title">Lo que nos mueve cada día</h2>
+                    <p class="section-subtitle">Principios que guían nuestro compromiso con cada cliente</p>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Misión -->
+                <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-card mission-card">
+                        <div class="value-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="value-content">
+                            <h3 class="value-title">Nuestra Misión</h3>
+                            <p class="value-text">
+                                Brindar a las familias de Lima una experiencia de compra cercana y confiable, ofreciendo
+                                productos de hogar de calidad, a precios accesibles, y con un servicio personalizado que
+                                haga de cada visita un momento agradable y práctico.
+                            </p>
+                            <div class="value-features">
+                                <span class="feature-tag">Calidad garantizada</span>
+                                <span class="feature-tag">Servicio personalizado</span>
+                                <span class="feature-tag">Precios justos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Visión -->
+                <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-card vision-card">
+                        <div class="value-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="value-content">
+                            <h3 class="value-title">Nuestra Visión</h3>
+                            <p class="value-text">
+                                Ser la cadena de minimarkets preferida en Lima, reconocida por nuestra cercanía con las
+                                familias,
+                                innovación en el servicio, y por ser un referente de confianza y calidad en el sector
+                                retail
+                                de productos para el hogar.
+                            </p>
+                            <div class="value-features">
+                                <span class="feature-tag">Liderazgo en el sector</span>
+                                <span class="feature-tag">Innovación constante</span>
+                                <span class="feature-tag">Referente de confianza</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Estadísticas -->
-    <section class="stats-section">
+    <!-- Locations Section -->
+    <section class="locations-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-12 text-center mb-5" data-aos="fade-up">
+                    <div class="section-badge">
+                        <i class="fas fa-map-marker-alt me-2"></i>Nuestras Ubicaciones
+                    </div>
+                    <h2 class="section-title">Te esperamos en nuestras 4 sucursales</h2>
+                    <p class="section-subtitle">Estratégicamente ubicadas para estar siempre cerca de ti</p>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Sucursal 1 -->
+                <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="location-card">
+                        <div class="location-header">
+                            <div class="location-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="location-info">
+                                <h4 class="location-name">La Victoria</h4>
+                                <p class="location-subtitle">Sucursal Principal</p>
+                            </div>
+                            <div class="location-badge main">Principal</div>
+                        </div>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Av. Principal 1234, La Victoria</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Lun-Vie: 7:00 AM - 10:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-phone"></i>
+                                <span>(01) 7134160</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sucursal 2 -->
+                <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="location-card">
+                        <div class="location-header">
+                            <div class="location-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="location-info">
+                                <h4 class="location-name">Surco</h4>
+                                <p class="location-subtitle">Zona Residencial</p>
+                            </div>
+                            <div class="location-badge">Sucursal</div>
+                        </div>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Av. Benavides 2345, Surco</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Lun-Sab: 8:00 AM - 9:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-phone"></i>
+                                <span>(01) 2551234</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sucursal 3 -->
+                <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="location-card">
+                        <div class="location-header">
+                            <div class="location-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="location-info">
+                                <h4 class="location-name">Los Olivos</h4>
+                                <p class="location-subtitle">Zona Norte</p>
+                            </div>
+                            <div class="location-badge">Sucursal</div>
+                        </div>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Av. Alfredo Mendiola 3456</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Lun-Dom: 7:30 AM - 9:30 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-phone"></i>
+                                <span>(01) 4851234</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sucursal 4 -->
+                <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="location-card">
+                        <div class="location-header">
+                            <div class="location-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="location-info">
+                                <h4 class="location-name">San Luis</h4>
+                                <p class="location-subtitle">Zona Este</p>
+                            </div>
+                            <div class="location-badge">Sucursal</div>
+                        </div>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Av. Del Aire 4567, San Luis</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Lun-Vie: 8:00 AM - 8:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-phone"></i>
+                                <span>(01) 3761234</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5" data-aos="fade-up">
+                    <div class="section-badge white">
+                        <i class="fas fa-chart-line me-2"></i>Nuestros Números
+                    </div>
+                    <h2 class="section-title white">El éxito en cifras</h2>
+                    <p class="section-subtitle white">Más de una década construyendo confianza</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="stat-card">
                         <div class="stat-icon">
                             <i class="fas fa-store"></i>
                         </div>
                         <div class="stat-number" data-target="4">0</div>
                         <div class="stat-label">Sucursales</div>
+                        <div class="stat-description">En puntos estratégicos</div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="stat-card">
                         <div class="stat-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <div class="stat-number" data-target="1500">0</div>
+                        <div class="stat-number" data-target="2500">0</div>
                         <div class="stat-label">Clientes Satisfechos</div>
+                        <div class="stat-description">Familias que confían en nosotros</div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="stat-card">
                         <div class="stat-icon">
                             <i class="fas fa-box"></i>
                         </div>
-                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-number" data-target="800">0</div>
                         <div class="stat-label">Productos Disponibles</div>
+                        <div class="stat-description">En todas nuestras categorías</div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
+                            <i class="fas fa-award"></i>
                         </div>
                         <div class="stat-number" data-target="15">0</div>
                         <div class="stat-label">Años de Experiencia</div>
+                        <div class="stat-description">Sirviendo a la comunidad</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center" data-aos="fade-up">
+                    <div class="cta-content">
+                        <h2 class="cta-title">¿Listo para descubrir todo lo que tenemos para ti?</h2>
+                        <p class="cta-text">
+                            Explora nuestro catálogo online o visítanos en cualquiera de nuestras sucursales.
+                            Te garantizamos una experiencia de compra única.
+                        </p>
+                        <div class="cta-buttons">
+                            <a href="products/catalog.html" class="btn btn-cta-primary">
+                                <i class="fas fa-shopping-bag me-2"></i>
+                                Explorar Productos
+                            </a>
+                            <a href="contact.html" class="btn btn-cta-secondary">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                Encontrar Sucursal
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -275,95 +442,57 @@
     <footer class="footer-main">
         <div class="container">
             <div class="row">
-                <!-- Redes Sociales -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Síguenos</h5>
                     <div class="social-links">
-                        <a href="#" class="social-link facebook" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link instagram" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link whatsapp" aria-label="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+                        <a href="#" class="social-link facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-
-                <!-- Horarios -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Horarios de atención</h5>
                     <div class="footer-info">
-                        <p class="info-item">
-                            <i class="far fa-clock me-2"></i>
-                            Domingo a viernes: 7:00 AM a 10:00 PM
-                        </p>
-                        <p class="info-item">
-                            <i class="far fa-clock me-2"></i>
-                            Sábados: 7:00 AM a 11:00 PM
-                        </p>
+                        <p><i class="far fa-clock me-2"></i>Domingo a viernes: 7:00 AM a 10:00 PM</p>
+                        <p><i class="far fa-clock me-2"></i>Sábados: 7:00 AM a 11:00 PM</p>
                     </div>
                 </div>
-
-                <!-- Ubicación -->
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 class="footer-title">Ubicación</h5>
+                    <h5 class="footer-title">Ubicación Principal</h5>
                     <div class="footer-info">
-                        <p class="info-item">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            La Victoria - Lima - Lima
-                        </p>
+                        <p><i class="fas fa-map-marker-alt me-2"></i>La Victoria - Lima - Lima</p>
                     </div>
                 </div>
-
-                <!-- Contacto -->
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="footer-title">Contacto</h5>
                     <div class="footer-info">
-                        <p class="info-item">
-                            <i class="fas fa-phone me-2"></i>
-                            <a href="tel:+5117134160" class="footer-link">(01) 7134160</a>
-                        </p>
-                        <p class="info-item">
-                            <i class="fas fa-envelope me-2"></i>
-                            <a href="mailto:marketing@corpdevalle.com.pe" class="footer-link">
-                                marketing@corpdevalle.com.pe
-                            </a>
-                        </p>
+                        <p><i class="fas fa-phone me-2"></i><a href="tel:+5117134160">(01) 7134160</a></p>
                     </div>
                 </div>
             </div>
-
-            <!-- Copyright -->
             <div class="footer-bottom">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <p class="copyright">
-                            &copy; 2025 Minimarket La Parada. Todos los derechos reservados.
-                        </p>
+                        <p class="copyright">&copy; 2025 Minimarket La Parada. Todos los derechos reservados.</p>
                     </div>
                     <div class="col-md-6 text-end">
-                        <p class="dev-credit">
-                            Desarrollado por <span class="highlight">Equipo UTP</span>
-                        </p>
+                        <p class="dev-credit">Desarrollado por <span class="highlight">Equipo UTP</span></p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Botón Scroll to Top -->
-    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Volver arriba">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/api-client.js"></script>
     <script src="../js/auth-manager.js"></script>
-    <script src="../js/main.js"></script>
     <script src="../js/cart-manager.js"></script>
+    <script src="../js/about.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/about.js"></script>
 </body>
 
 </html>

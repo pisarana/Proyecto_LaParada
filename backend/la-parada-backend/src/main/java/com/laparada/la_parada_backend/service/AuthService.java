@@ -4,6 +4,9 @@ import com.laparada.la_parada_backend.dto.*;
 import com.laparada.la_parada_backend.entity.User;
 import com.laparada.la_parada_backend.repository.UserRepository;
 import com.laparada.la_parada_backend.security.JWTUtil;
+
+import jakarta.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,15 +23,31 @@ public class AuthService {
     private EmailService emailService;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+
     public AuthResponse login(LoginRequest loginRequest) {
+        System.out.println("🔍 LOGIN ATTEMPT: " + loginRequest.getEmail());
+
         // Buscar usuario por email
         User user = userRepository.findByEmailAndActivoTrue(loginRequest.getEmail())
-                .orElseThrow(() -> new RuntimeException("Credenciales inválidas"));
+                .orElseThrow(() -> {
+                    System.err.println("❌ USER NOT FOUND: " + loginRequest.getEmail());
+                    return new RuntimeException("Credenciales inválidas");
+                });
+
+        System.out.println("✅ USER FOUND: " + user.getEmail() + " | ROL: " + user.getRol());
+        System.out.println("🔑 PASSWORD CHECK...");
 
         // Validar contraseña
-        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        boolean passwordMatch = passwordEncoder.matches(loginRequest.getPassword(), user.getPassword());
+        System.out.println("🔑 PASSWORD MATCH: " + passwordMatch);
+
+        if (!passwordMatch) {
+            System.err.println("❌ WRONG PASSWORD for: " + loginRequest.getEmail());
+            System.out.println("🔑 EXPECTED HASH: " + user.getPassword());
             throw new RuntimeException("Credenciales inválidas");
         }
+
+        System.out.println("✅ LOGIN SUCCESS: " + user.getEmail());
 
         // Generar token JWT
         String token = jwtUtil.generateToken(user.getEmail(), user.getRol().toString());
@@ -49,7 +68,9 @@ public class AuthService {
         newUser.setNombre(registerRequest.getNombre());
         newUser.setEmail(registerRequest.getEmail());
         newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        newUser.setRol(User.Role.CLIENTE); // Por defecto es cliente
+        newUser.setTelefono(registerRequest.getTelefono());
+        newUser.setDireccion(registerRequest.getDireccion());
+        newUser.setRol(User.Role.CLIENTE);
         newUser.setActivo(true);
 
         // Guardar usuario

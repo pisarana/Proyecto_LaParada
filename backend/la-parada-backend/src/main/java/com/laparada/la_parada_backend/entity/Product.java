@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonProperty; // ✅ AGREGAR ESTA IMPORTACIÓN
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -135,6 +136,23 @@ public class Product {
 
     public void setImagenUrl(String imagenUrl) {
         this.imagenUrl = imagenUrl;
+    }
+
+    // ✅ AGREGAR ESTOS MÉTODOS AL FINAL DE LA CLASE
+    /**
+     * Getter para compatibilidad con JSON que usa "imagen"
+     */
+    @JsonProperty("imagen")
+    public String getImagen() {
+        return imagenUrl;
+    }
+
+    /**
+     * Setter para compatibilidad con JSON que usa "imagen"
+     */
+    @JsonProperty("imagen")
+    public void setImagen(String imagen) {
+        this.imagenUrl = imagen;
     }
 
     public Boolean getActivo() {
