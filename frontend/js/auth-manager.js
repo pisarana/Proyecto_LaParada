@@ -209,6 +209,13 @@ class AuthManager {
             `;
             }
         }
+
+        // After navbar update, ensure store visibility rules are applied for admin users
+        try {
+            this.hideStoreForAdmin(user);
+        } catch (e) {
+            console.error('Error applying admin store visibility rules', e);
+        }
     }
 
     // ===== USER MENU =====
@@ -253,6 +260,72 @@ class AuthManager {
         setTimeout(() => {
             document.addEventListener('click', () => menu.remove(), { once: true });
         }, 100);
+    }
+
+    // ===== HIDE/SHOW STORE FOR ADMIN =====
+    // Oculta enlaces y controles de compra si el usuario es administrador
+    hideStoreForAdmin(user) {
+        const isAdmin = !!(user && (user.rol === 'ADMINISTRADOR' || user.role === 'admin' || user.isAdmin));
+
+        // Helper to mark elements we change so we can revert only our changes
+        const markChanged = (el) => el.setAttribute('data-hidden-by-admin', 'true');
+        const unmarkChanged = (el) => el.removeAttribute('data-hidden-by-admin');
+
+        // NAV LINKS: esconder links a la tienda
+        const navLinks = Array.from(document.querySelectorAll('a.nav-link, a.nav-btn, .nav-btn'));
+        navLinks.forEach(link => {
+            const href = (link.getAttribute('href') || '').toLowerCase();
+            const text = (link.textContent || '').toLowerCase();
+
+            const isStoreLink = href.includes('products') || href.includes('catalog.html') || text.includes('tienda');
+
+            if (isStoreLink) {
+                if (isAdmin) {
+                    if (link.style.display !== 'none') {
+                        markChanged(link);
+                        link.style.display = 'none';
+                    }
+                } else {
+                    if (link.getAttribute('data-hidden-by-admin') === 'true') {
+                        link.style.display = '';
+                        unmarkChanged(link);
+                    }
+                }
+            }
+        });
+
+        // CART BUTTON(s)
+        const cartBtns = Array.from(document.querySelectorAll('#cartBtn, .btn-cart'));
+        cartBtns.forEach(btn => {
+            if (isAdmin) {
+                if (btn.style.display !== 'none') { markChanged(btn); btn.style.display = 'none'; }
+            } else {
+                if (btn.getAttribute('data-hidden-by-admin') === 'true') { btn.style.display = ''; unmarkChanged(btn); }
+            }
+        });
+
+        // PRODUCT LIST CONTAINERS: hide product grids/containers so admin cannot view store pages content
+        const productContainers = Array.from(document.querySelectorAll('#productsGrid, #productsContainer, .products-grid, .catalog-section, .catalog-main, .featured-section'));
+        productContainers.forEach(cont => {
+            if (isAdmin) {
+                if (cont.style.display !== 'none') { markChanged(cont); cont.style.display = 'none'; }
+            } else {
+                if (cont.getAttribute('data-hidden-by-admin') === 'true') { cont.style.display = ''; unmarkChanged(cont); }
+            }
+        });
+
+        // ACTION BUTTONS: add-to-cart, quick add buttons
+        const actionSelectors = ['.btn-add-to-cart', '.btn-add-full', '.btn-add-to-cart-modal', '.btn-add-to-cart'];
+        const actionButtons = Array.from(document.querySelectorAll(actionSelectors.join(',')));
+        actionButtons.forEach(btn => {
+            if (isAdmin) {
+                if (btn.style.display !== 'none') { markChanged(btn); btn.style.display = 'none'; }
+                btn.disabled = true;
+            } else {
+                if (btn.getAttribute('data-hidden-by-admin') === 'true') { btn.style.display = ''; unmarkChanged(btn); }
+                btn.disabled = false;
+            }
+        });
     }
 
     // ===== LOGOUT =====
