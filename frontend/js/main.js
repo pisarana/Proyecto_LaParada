@@ -32,12 +32,24 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('❌ PRODUCTS not found!');
     }
+    // Apply admin UI rules after products render
+    try {
+        if (window.AUTH) AUTH.hideStoreForAdmin(API.getUser());
+    } catch (e) {
+        console.error('Error applying admin UI rules after products init', e);
+    }
     // En main.js, después de PRODUCTS.init(), agregar:
     console.log('🛒 Initializing Cart Manager...');
     if (window.CART) {
         CART.init();
     } else {
         console.error('❌ CART not found!');
+    }
+    // Re-apply admin UI rules after cart init
+    try {
+        if (window.AUTH) AUTH.hideStoreForAdmin(API.getUser());
+    } catch (e) {
+        console.error('Error applying admin UI rules after cart init', e);
     }
     console.log('🎯 Ready for next phase');
     // En main.js, después de CART.init(), agregar:
