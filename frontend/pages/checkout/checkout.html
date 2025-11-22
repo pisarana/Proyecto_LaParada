@@ -204,14 +204,6 @@
                                             Tarjeta de Crédito/Débito
                                         </label>
                                     </div>
-                                    <div class="payment-option">
-                                        <input type="radio" id="paypal" name="metodo_pago" value="paypal"
-                                            onchange="CheckoutModule.togglePaymentMethod('paypal')">
-                                        <label for="paypal" class="payment-label">
-                                            <i class="fab fa-paypal me-2"></i>
-                                            PayPal
-                                        </label>
-                                    </div>
                                 </div>
 
                                 <!-- Card Payment Fields -->
@@ -247,17 +239,6 @@
                                             <div class="invalid-feedback">
                                                 CVV de 3-4 dígitos
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- PayPal Payment -->
-                                <div id="paypalPaymentFields" class="paypal-payment-fields" style="display: none;">
-                                    <div class="paypal-container">
-                                        <p class="text-muted mb-3">Serás redirigido a PayPal para completar tu pago de
-                                            forma segura.</p>
-                                        <div id="paypal-button-container">
-                                            <!-- PayPal button se renderiza aquí -->
                                         </div>
                                     </div>
                                 </div>
@@ -399,10 +380,8 @@
     <script src="../../js/api-client.js"></script>
     <script src="../../js/auth-manager.js"></script>
     <script src="../../js/products-fixed.js"></script>
-
     <script src="../../js/cart-manager.js"></script>
     <script src="../../js/checkout-manager.js"></script>
-
     <script src="../../js/main.js"></script>
 </body>
 

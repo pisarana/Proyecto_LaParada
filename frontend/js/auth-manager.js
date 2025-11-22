@@ -139,84 +139,104 @@ class AuthManager {
     // ===== NAVBAR UPDATE =====
     // ===== NAVBAR UPDATE - CON BOTÓN ADMIN =====
     updateNavbar() {
-        const loginBtn = document.getElementById('loginBtn');
-        if (!loginBtn) return;
+    const user = API.getUser();
+    const cartLink = '/frontend/pages/cart/cart.html';
+    const dashboardLink = '/frontend/pages/admin/dashboard.html';
+    const myOrdersLink = '/frontend/pages/checkout/my-orders.html'; // <- Nuevo
 
-        const user = API.getUser();
+    const navbarActions = document.querySelector('.navbar-actions');
+    const navbarNav = document.querySelector('.navbar-nav'); // Contenedor de los nav-links
+    if (!navbarActions || !navbarNav) return;
 
-        const cartLink = '/frontend/pages/cart/cart.html';   // <- una sola verdad
-        const dashboardLink = '/frontend/pages/admin/dashboard.html'; // <- una sola verdad
-        if (user) {
-            console.log('👤 User logged in, updating navbar:', user.nombre);
+    // Limpiar nav-links extra
+    const existingMyOrders = document.getElementById('myOrdersNav');
+    if (existingMyOrders) existingMyOrders.remove();
 
-            // ✅ CREAR BOTÓN ADMIN SI ES ADMINISTRADOR
-            const adminButton = user.rol === 'ADMINISTRADOR'
-                ? `<a href="${dashboardLink}" class="btn btn-admin me-2" id="adminBtn">
-                 <i class="fas fa-cogs me-1"></i>
-                 <span class="d-none d-md-inline">Panel Admin</span>
+    if (user) {
+        console.log('👤 User logged in, updating navbar:', user.nombre);
+
+        // Admin button
+        const adminButton = user.rol === 'ADMINISTRADOR'
+            ? `<a href="${dashboardLink}" class="btn btn-admin me-2" id="adminBtn">
+                    <i class="fas fa-cogs me-1"></i>
+                    <span class="d-none d-md-inline">Panel Admin</span>
                </a>`
-                : '';
+            : '';
 
-            // Actualizar el área de botones de la navbar
-            const navbarActions = document.querySelector('.navbar-actions');
-
-
-            if (navbarActions) {
-                navbarActions.innerHTML = `
-                <!-- Carrito -->
-                <a href="${cartLink}" class="btn btn-cart me-2" id="cartBtn">
-                    <i class="fas fa-shopping-cart me-1"></i>
-                    <span class="badge bg-danger cart-badge" id="cartCount">0</span>
-                </a>
-                
-                <!-- Botón Admin (solo si es administrador) -->
-                ${adminButton}
-                
-                <!-- Menú Usuario -->
-                <div class="btn btn-user" id="loginBtn">
-                    <i class="fas fa-user-circle"></i>
-                    <span class="d-none d-md-inline ms-1">${user.nombre}</span>
-                    <i class="fas fa-chevron-down ms-1"></i>
-                </div>
-            `;
-
-                // Re-bind click handler para el menú usuario
-                const newLoginBtn = document.getElementById('loginBtn');
-                if (newLoginBtn) {
-                    newLoginBtn.onclick = (e) => {
-                        e.preventDefault();
-                        this.showUserMenu(e);
-                    };
-                }
-            }
-
-        } else {
-            console.log('🚪 No user logged in');
-
-            // Reset para usuario no logueado
-            const navbarActions = document.querySelector('.navbar-actions');
-            if (navbarActions) {
-                navbarActions.innerHTML = `
-            
-                <a href="${cartLink}" class="btn btn-cart me-2" id="cartBtn">
-                    <i class="fas fa-shopping-cart me-1"></i>
-                    <span class="badge bg-danger cart-badge" id="cartCount">0</span>
-                </a>
-                <a href="/frontend/pages/auth/login.html" class="btn btn-login" id="loginBtn">
-                    <i class="fas fa-user me-1"></i>
-                    <span class="d-none d-md-inline">Iniciar sesión</span>
-                </a>
-            `;
-            }
+        // Botón Mis Pedidos como nav-link solo para clientes
+        if (user.rol !== 'ADMINISTRADOR') {
+            const li = document.createElement('li');
+            li.className = 'nav-item';
+            li.id = 'myOrdersNav';
+            li.innerHTML = `<a class="nav-link nav-btn" href="${myOrdersLink}">
+                                <i class="fas fa-box me-1"></i> Mis Pedidos
+                            </a>`;
+            navbarNav.appendChild(li);
         }
 
-        // After navbar update, ensure store visibility rules are applied for admin users
-        try {
-            this.hideStoreForAdmin(user);
-        } catch (e) {
-            console.error('Error applying admin store visibility rules', e);
+        // Actualizar acciones (carrito + usuario + admin)
+        navbarActions.innerHTML = `
+            <a href="${cartLink}" class="btn btn-cart me-2" id="cartBtn">
+                <i class="fas fa-shopping-cart me-1"></i>
+                <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+            </a>
+
+            ${adminButton}
+
+            <div class="btn btn-user" id="loginBtn">
+                <i class="fas fa-user-circle"></i>
+                <span class="d-none d-md-inline ms-1">${user.nombre}</span>
+                <i class="fas fa-chevron-down ms-1"></i>
+            </div>
+        `;
+
+        const newLoginBtn = document.getElementById('loginBtn');
+        if (newLoginBtn) {
+            newLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                this.showUserMenu(e);
+            };
         }
+
+    } else {
+        console.log('🚪 No user logged in');
+        navbarActions.innerHTML = `
+            <a href="${cartLink}" class="btn btn-cart me-2" id="cartBtn">
+                <i class="fas fa-shopping-cart me-1"></i>
+                <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+            </a>
+
+            <a href="/frontend/pages/auth/login.html" class="btn btn-login" id="loginBtn">
+                <i class="fas fa-user me-1"></i>
+                <span class="d-none d-md-inline">Iniciar sesión</span>
+            </a>
+        `;
     }
+
+    // 🔥 Lógica para ocultar enlaces según rol
+    const tiendaLink = document.querySelector('a[href$="products/catalog.html"]');
+    const nosotrosLink = document.querySelector('a[href$="about.html"]');
+    const contactanosLink = document.querySelector('a[href$="contact.html"]');
+    const cartBtn = document.getElementById('cartBtn');
+    const adminNavbar = document.getElementById("adminNavbar");
+    
+    if (adminNavbar) {
+        const adminLinks = adminNavbar.querySelectorAll("a.nav-link");
+        adminLinks.forEach(link => link.style.display = "none");
+    }
+
+    if (user && user.rol === "ADMINISTRADOR") {
+        if (tiendaLink) tiendaLink.style.display = 'none';
+        if (nosotrosLink) nosotrosLink.style.display = 'block';
+        if (contactanosLink) contactanosLink.style.display = 'block';
+        if (cartBtn) cartBtn.style.display = 'none';
+    } else {
+        if (tiendaLink) tiendaLink.style.display = 'block';
+        if (nosotrosLink) nosotrosLink.style.display = 'block';
+        if (contactanosLink) contactanosLink.style.display = 'block';
+        if (cartBtn) cartBtn.style.display = 'flex';
+    }
+}
 
     // ===== USER MENU =====
     showUserMenu(event) {
@@ -260,72 +280,6 @@ class AuthManager {
         setTimeout(() => {
             document.addEventListener('click', () => menu.remove(), { once: true });
         }, 100);
-    }
-
-    // ===== HIDE/SHOW STORE FOR ADMIN =====
-    // Oculta enlaces y controles de compra si el usuario es administrador
-    hideStoreForAdmin(user) {
-        const isAdmin = !!(user && (user.rol === 'ADMINISTRADOR' || user.role === 'admin' || user.isAdmin));
-
-        // Helper to mark elements we change so we can revert only our changes
-        const markChanged = (el) => el.setAttribute('data-hidden-by-admin', 'true');
-        const unmarkChanged = (el) => el.removeAttribute('data-hidden-by-admin');
-
-        // NAV LINKS: esconder links a la tienda
-        const navLinks = Array.from(document.querySelectorAll('a.nav-link, a.nav-btn, .nav-btn'));
-        navLinks.forEach(link => {
-            const href = (link.getAttribute('href') || '').toLowerCase();
-            const text = (link.textContent || '').toLowerCase();
-
-            const isStoreLink = href.includes('products') || href.includes('catalog.html') || text.includes('tienda');
-
-            if (isStoreLink) {
-                if (isAdmin) {
-                    if (link.style.display !== 'none') {
-                        markChanged(link);
-                        link.style.display = 'none';
-                    }
-                } else {
-                    if (link.getAttribute('data-hidden-by-admin') === 'true') {
-                        link.style.display = '';
-                        unmarkChanged(link);
-                    }
-                }
-            }
-        });
-
-        // CART BUTTON(s)
-        const cartBtns = Array.from(document.querySelectorAll('#cartBtn, .btn-cart'));
-        cartBtns.forEach(btn => {
-            if (isAdmin) {
-                if (btn.style.display !== 'none') { markChanged(btn); btn.style.display = 'none'; }
-            } else {
-                if (btn.getAttribute('data-hidden-by-admin') === 'true') { btn.style.display = ''; unmarkChanged(btn); }
-            }
-        });
-
-        // PRODUCT LIST CONTAINERS: hide product grids/containers so admin cannot view store pages content
-        const productContainers = Array.from(document.querySelectorAll('#productsGrid, #productsContainer, .products-grid, .catalog-section, .catalog-main, .featured-section'));
-        productContainers.forEach(cont => {
-            if (isAdmin) {
-                if (cont.style.display !== 'none') { markChanged(cont); cont.style.display = 'none'; }
-            } else {
-                if (cont.getAttribute('data-hidden-by-admin') === 'true') { cont.style.display = ''; unmarkChanged(cont); }
-            }
-        });
-
-        // ACTION BUTTONS: add-to-cart, quick add buttons
-        const actionSelectors = ['.btn-add-to-cart', '.btn-add-full', '.btn-add-to-cart-modal', '.btn-add-to-cart'];
-        const actionButtons = Array.from(document.querySelectorAll(actionSelectors.join(',')));
-        actionButtons.forEach(btn => {
-            if (isAdmin) {
-                if (btn.style.display !== 'none') { markChanged(btn); btn.style.display = 'none'; }
-                btn.disabled = true;
-            } else {
-                if (btn.getAttribute('data-hidden-by-admin') === 'true') { btn.style.display = ''; unmarkChanged(btn); }
-                btn.disabled = false;
-            }
-        });
     }
 
     // ===== LOGOUT =====

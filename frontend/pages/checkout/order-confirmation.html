@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pedido - Minimarket La Parada</title>
+
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/order-confirmation.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <div class="brand-container">
+                    <img src="../../assets/images/LaParadaLogo.jpg" class="brand-logo">
+                    <span class="brand-text">La Parada</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link nav-btn" href="../products/catalog.html"><i class="fas fa-store me-1"></i> Tienda</a></li>
+                    <li class="nav-item"><a class="nav-link nav-btn" href="../about.html"><i class="fas fa-users me-1"></i> Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link nav-btn" href="../contact.html"><i class="fas fa-envelope me-1"></i> Contáctanos</a></li>
+                </ul>
+
+                <div class="navbar-actions">
+                    <a href="../cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>
+                        <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+                    </a>
+                    <a href="../auth/login.html" class="btn btn-login" id="loginBtn">
+                        <i class="fas fa-user me-1"></i>
+                        Iniciar sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN SECTION -->
+    <section class="confirmation-section">
+        <div class="container">
+            <div class="confirmation-card">
+
+                <!-- Ícono grande -->
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <h1 class="confirmation-title">¡Tu pedido fue realizado con éxito!</h1>
+                <p class="confirmation-msg">Gracias por tu compra. A continuación se muestran los detalles de tu pedido.</p>
+
+                <!-- ID del pedido -->
+                <div class="order-id-box">
+                    <span class="label">ID del Pedido:</span>
+                    <strong id="orderId">#000000</strong>
+                </div>
+
+                <!-- TABLA DE PRODUCTOS -->
+                <div class="table-responsive mt-4">
+                    <table class="table order-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderProducts">
+                            <!-- Se llenará dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TOTAL -->
+                <div class="order-total-box">
+                    <span>Total Pagado:</span>
+                    <strong id="orderTotal">S/. 0.00</strong>
+                </div>
+
+                <!-- BOTONES -->
+                <div class="confirmation-buttons">
+                    <a href="../products/catalog.html" class="btn btn-primary-shop">
+                        <i class="fas fa-store me-2"></i> Volver a la tienda
+                    </a>
+
+                    <a href="../checkout/my-orders.html" class="btn btn-secondary-orders">
+                        <i class="fas fa-list me-2"></i> Ver mis pedidos
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Síguenos</h5>
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Horarios de atención</h5>
+                    <p>Domingo a viernes: 7 AM - 10 PM</p>
+                    <p>Sábados: 7 AM - 11 PM</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Ubicación</h5>
+                    <p>La Victoria - Lima - Perú</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Teléfono</h5>
+                    <p><i class="fas fa-phone me-2"></i>(01) 7134160</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Minimarket La Parada. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../../js/api-client.js"></script>
+    <script src="../../js/auth-manager.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/order-confirmation.js"></script>
+</body>
+</html>

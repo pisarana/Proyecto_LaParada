@@ -7,7 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import com.fasterxml.jackson.annotation.JsonProperty; // ✅ AGREGAR ESTA IMPORTACIÓN
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -58,21 +59,13 @@ public class Product {
     @UpdateTimestamp
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-    // Relación con items de pedido
+
+    // 🔥 EVITAR BUCLE INFINITO: IGNORAR ORDER ITEMS DESDE PRODUCT
+    @JsonIgnore
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderItem> itemsPedido = new ArrayList<>();
 
-    public List<OrderItem> getItemsPedido() {
-        return itemsPedido;
-    }
-
-    public void setItemsPedido(List<OrderItem> itemsPedido) {
-        this.itemsPedido = itemsPedido;
-    }
-
-    // Constructores
-    public Product() {
-    }
+    public Product() {}
 
     public Product(String nombre, BigDecimal precio, Integer stock, String categoria) {
         this.nombre = nombre;
@@ -81,101 +74,48 @@ public class Product {
         this.categoria = categoria;
     }
 
-    // Getters y Setters
-    public Long getId() {
-        return id;
-    }
+    // Getters/Setters ...
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getImagenUrl() {
-        return imagenUrl;
-    }
-
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
-    }
-
-    // ✅ AGREGAR ESTOS MÉTODOS AL FINAL DE LA CLASE
-    /**
-     * Getter para compatibilidad con JSON que usa "imagen"
-     */
     @JsonProperty("imagen")
     public String getImagen() {
         return imagenUrl;
     }
 
-    /**
-     * Setter para compatibilidad con JSON que usa "imagen"
-     */
     @JsonProperty("imagen")
     public void setImagen(String imagen) {
         this.imagenUrl = imagen;
     }
 
-    public Boolean getActivo() {
-        return activo;
-    }
+    public List<OrderItem> getItemsPedido() { return itemsPedido; }
+    public void setItemsPedido(List<OrderItem> itemsPedido) { this.itemsPedido = itemsPedido; }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Boolean getDestacado() {
-        return destacado;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public void setDestacado(Boolean destacado) {
-        this.destacado = destacado;
-    }
+    public BigDecimal getPrecio() { return precio; }
+    public void setPrecio(BigDecimal precio) { this.precio = precio; }
 
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
+    public Integer getStock() { return stock; }
+    public void setStock(Integer stock) { this.stock = stock; }
 
-    public LocalDateTime getFechaActualizacion() {
-        return fechaActualizacion;
-    }
+    public String getCategoria() { return categoria; }
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+
+    public String getImagenUrl() { return imagenUrl; }
+    public void setImagenUrl(String imagenUrl) { this.imagenUrl = imagenUrl; }
+
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
+
+    public Boolean getDestacado() { return destacado; }
+    public void setDestacado(Boolean destacado) { this.destacado = destacado; }
+
+    public LocalDateTime getFechaCreacion() { return fechaCreacion; }
+    public LocalDateTime getFechaActualizacion() { return fechaActualizacion; }
 }
