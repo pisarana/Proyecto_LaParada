@@ -130,12 +130,25 @@ class CartManager {
     }
 
     // ===== CLEAR CART =====
-    clearCart() {
-        if (confirm('¿Estás seguro de vaciar el carrito?')) {
-            this.cart = [];
-            this.saveCart();
-            this.updateCartBadge();
+    clearCart(confirmDialog = true) {
+        // Si se pide confirmación y el usuario cancela, no hacer nada
+        if (confirmDialog && !confirm('¿Estás seguro de vaciar el carrito?')) return;
+
+        this.cart = [];
+
+        // Guardar carrito vacío en localStorage
+        this.saveCart();
+
+        // Actualizar badge del carrito
+        this.updateCartBadge();
+
+        // Refrescar página del carrito si estás en cart.html
+        if (typeof this.refreshCartPage === "function") {
             this.refreshCartPage();
+        }
+
+        // Solo mostrar alerta si el vaciado fue manual
+        if (confirmDialog && typeof this.showToast === "function") {
             this.showToast('Carrito vaciado', 'info');
         }
     }

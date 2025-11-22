@@ -5,43 +5,37 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_items")
 public class OrderItem {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    // 🔥 EVITA BUCLE ORDER → items → orderitem → order → items...
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pedido_id", nullable = false)
     private Order pedido;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id", nullable = false)
     private Product producto;
-    
-    @Min(value = 1, message = "La cantidad debe ser mayor a 0")
+
+    @Min(value = 1)
     @NotNull(message = "La cantidad es obligatoria")
     @Column(nullable = false)
     private Integer cantidad;
-    
-    @DecimalMin(value = "0.0", message = "El precio debe ser mayor o igual a 0")
+
+    @DecimalMin(value = "0.0")
     @NotNull(message = "El precio es obligatorio")
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
-    
-    // Constructores
-    public OrderItem() {}
-    
-    public OrderItem(Order pedido, Product producto, Integer cantidad, BigDecimal precio) {
-        this.pedido = pedido;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.precio = precio;
-    }
     
     // Getters y Setters
     public Long getId() { return id; }

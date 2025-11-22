@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - Minimarket La Parada</title>
+
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/my-orders.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <div class="brand-container">
+                    <img src="../../assets/images/LaParadaLogo.jpg" alt="Logo La Parada" class="brand-logo"
+                        onerror="this.style.display='none'">
+                    <span class="brand-text">La Parada</span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../products/catalog.html">
+                            <i class="fas fa-store me-1"></i> Tienda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../about.html">
+                            <i class="fas fa-users me-1"></i> Nosotros
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-btn" href="../contact.html">
+                            <i class="fas fa-envelope me-1"></i> Contáctanos
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="navbar-actions">
+                    <a href="../cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>
+                        <span class="badge bg-danger cart-badge" id="cartCount">0</span>
+                    </a>
+                    <a href="../auth/login.html" class="btn btn-login" id="loginBtn">
+                        <i class="fas fa-user me-1"></i> Iniciar sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN SECTION -->
+    <section class="my-orders-section py-5">
+        <div class="container">
+            <h2 class="mb-4">Mis Pedidos</h2>
+
+            <div id="ordersContainer">
+                <!-- Aquí se renderizan los pedidos -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-main">
+        <div class="container text-center py-3">
+            <p>&copy; 2025 Minimarket La Parada. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/api-client.js"></script>
+    <script src="../../js/auth-manager.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        AUTH.init();
+    });
+</script>
+    <script src="../../js/checkout-manager.js"></script>
+    <script src="../../js/cart-manager.js"></script>
+    <script src="../../js/my-orders.js"></script>
+</body>
+</html>

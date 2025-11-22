@@ -1,0 +1,127 @@
+/* ===== CONFIRMACIÓN ===== */
+.confirmation-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    min-height: 70vh;
+}
+
+.confirmation-card {
+    background: white;
+    border: 2px solid var(--primary-green);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    max-width: 850px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Icono grande */
+.confirmation-icon {
+    font-size: 4.5rem;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+}
+
+.confirmation-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.confirmation-msg {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 25px;
+}
+
+/* ID del pedido */
+.order-id-box {
+    background: var(--gray-50);
+    border-left: 4px solid var(--primary-green);
+    padding: 12px 15px;
+    margin: 0 auto 25px auto;
+    max-width: 360px;
+    border-radius: var(--radius-md);
+    font-size: 1.1rem;
+}
+
+.order-id-box .label {
+    color: var(--text-light);
+}
+
+/* TABLA */
+.order-table {
+    border: 1px solid var(--gray-200);
+}
+
+.order-table thead {
+    background: var(--primary-green);
+    color: white;
+}
+
+.order-table th, .order-table td {
+    vertical-align: middle;
+    padding: 12px;
+    font-size: 0.95rem;
+}
+
+.order-table tbody tr {
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.order-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* TOTAL */
+.order-total-box {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-top: 25px;
+}
+
+/* BOTONES */
+.confirmation-buttons {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-primary-shop {
+    background: var(--primary-green);
+    color: white;
+    padding: 12px 25px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary-shop:hover {
+    background: var(--primary-green-dark);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-secondary-orders {
+    background: var(--gray-300);
+    color: var(--text-dark);
+    padding: 12px 25px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-secondary-orders:hover {
+    background: var(--gray-400);
+    transform: translateY(-2px);
+}
+
+/* Animación */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

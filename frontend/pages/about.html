@@ -29,42 +29,28 @@
         <div class="container">
             <a class="navbar-brand" href="../index.html">
                 <div class="brand-container">
-                    <img src="../assets/images/LaParadaLogo.jpg" alt="Logo La Parada" class="brand-logo"
-                        onerror="this.style.display='none'">
+                    <img src="../assets/images/LaParadaLogo.jpg" class="brand-logo">
                     <span class="brand-text">La Parada</span>
                 </div>
             </a>
 
-            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarContent">
+            <button class="navbar-toggler custom-toggler" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn" href="products/catalog.html">
-                            <i class="fas fa-store me-1"></i> Tienda
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn active" href="about.html">
-                            <i class="fas fa-users me-1"></i> Nosotros
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn" href="contact.html">
-                            <i class="fas fa-envelope me-1"></i> Contáctanos
-                        </a>
-                    </li>
+                    <li><a class="nav-link nav-btn" href="/frontend/pages/products/catalog.html">Tienda</a></li>
+                    <li><a class="nav-link nav-btn" href="/frontend/pages/about.html">Nosotros</a></li>
+                    <li><a class="nav-link nav-btn" href="/frontend/pages/contact.html">Contáctanos</a></li>
                 </ul>
 
                 <div class="navbar-actions">
-                    <a href="cart/cart.html" class="btn btn-cart me-2" id="cartBtn">
+                    <a href="cart/cart.html" class="btn btn-cart me-2">
                         <i class="fas fa-shopping-cart me-1"></i>
                         <span class="badge bg-danger cart-badge" id="cartCount">0</span>
                     </a>
-                    <a href="../pages/auth/login.html" class="btn btn-login" id="loginBtn">
+                    <a href="auth/login.html" class="btn btn-login">
                         <i class="fas fa-user me-1"></i> Iniciar sesión
                     </a>
                 </div>

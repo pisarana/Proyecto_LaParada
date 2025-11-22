@@ -23,3 +23,10 @@ WHERE email = 'admin@laparada.com';
 
 INSERT INTO users (nombre, email, password, rol, activo, fecha_creacion, fecha_actualizacion) 
 VALUES ('Misael Challco', 'misaelchallco0@gmail.com', 'password123', 'CLIENTE', true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO users (nombre, email, password, rol, activo, fecha_creacion, fecha_actualizacion) 
+VALUES ('Pepito Pe', 'cliente@laparada.com', 'cliente123', 'CLIENTE', true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+UPDATE users
+SET password = '$2a$10$h6t5JvvsJqNlwz2DZIxZpeLhzD7BY1TiSplaXbaHcUMK/dws4E1WC'
+WHERE email = 'cliente@laparada.com';
