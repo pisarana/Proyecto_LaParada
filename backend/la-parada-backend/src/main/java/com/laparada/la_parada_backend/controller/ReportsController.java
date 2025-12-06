@@ -46,9 +46,16 @@ public class ReportsController {
 
         // Orders por estado usando ENUM
         Long pendingOrders = orderRepository.findAll().stream()
-                .filter(order -> Order.Estado.PENDIENTE.equals(order.getEstado()))
+                .filter(order -> Order.Estado.PENDIENTE.equals(order.getEstado()) || 
+                        Order.Estado.CONFIRMADO.equals(order.getEstado()))
                 .count();
         stats.put("pendingOrders", pendingOrders);
+
+        Long processingOrders = orderRepository.findAll().stream()
+                .filter(order -> Order.Estado.EN_PREPARACION.equals(order.getEstado()) || 
+                        Order.Estado.EN_CAMINO.equals(order.getEstado()))
+                .count();
+        stats.put("processingOrders", processingOrders);
 
         Long completedOrders = orderRepository.findAll().stream()
                 .filter(order -> Order.Estado.ENTREGADO.equals(order.getEstado()))

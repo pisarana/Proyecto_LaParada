@@ -71,34 +71,36 @@
     </nav>
 
     <!-- Admin Dashboard Section -->
-    <section class="admin-dashboard-section">
+    <section class="admin-dashboard-section" role="main">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="dashboard-title">Panel del administrador</h1>
+                    <h1 class="dashboard-title">
+                        <i class="fas fa-cogs me-3"></i>Panel de Control
+                    </h1>
                 </div>
             </div>
 
             <!-- Pestañas del Admin -->
             <div class="row">
                 <div class="col-12">
-                    <nav class="admin-tabs">
+                    <nav class="admin-tabs" role="tablist">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-products-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-products" type="button" role="tab">
-                                <i class="fas fa-boxes me-2"></i>Gestión de Productos
+                                data-bs-target="#nav-products" type="button" role="tab" aria-controls="nav-products" aria-selected="true">
+                                <i class="fas fa-boxes me-2"></i><span class="d-none d-sm-inline">Gestión de Productos</span>
                             </button>
                             <button class="nav-link" id="nav-orders-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-orders" type="button" role="tab">
-                                <i class="fas fa-shopping-cart me-2"></i>Pedidos
+                                data-bs-target="#nav-orders" type="button" role="tab" aria-controls="nav-orders" aria-selected="false">
+                                <i class="fas fa-shopping-cart me-2"></i><span class="d-none d-sm-inline">Pedidos</span>
                             </button>
                             <button class="nav-link" id="nav-users-tab" data-bs-toggle="tab" data-bs-target="#nav-users"
-                                type="button" role="tab">
-                                <i class="fas fa-users me-2"></i>Usuarios
+                                type="button" role="tab" aria-controls="nav-users" aria-selected="false">
+                                <i class="fas fa-users me-2"></i><span class="d-none d-sm-inline">Usuarios</span>
                             </button>
                             <button class="nav-link" id="nav-reports-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-reports" type="button" role="tab">
-                                <i class="fas fa-chart-bar me-2"></i>Reportes
+                                data-bs-target="#nav-reports" type="button" role="tab" aria-controls="nav-reports" aria-selected="false">
+                                <i class="fas fa-chart-bar me-2"></i><span class="d-none d-sm-inline">Reportes</span>
                             </button>
                         </div>
                     </nav>
@@ -115,32 +117,35 @@
                                 </div>
 
                                 <!-- Filtros -->
-                                <div class="filters-section mb-3">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
+                                <div class="filters-section mb-4">
+                                    <div class="row g-3">
+                                        <div class="col-lg-5 col-md-6 col-sm-12">
+                                            <label for="searchProducts" class="form-label visually-hidden">Buscar productos</label>
                                             <input type="text" class="form-control" id="searchProducts"
-                                                placeholder="Buscar productos...">
+                                                placeholder="🔍 Buscar productos por nombre..." aria-label="Buscar productos">
                                         </div>
-                                        <div class="col-md-3">
-                                            <select class="form-select" id="filterCategory">
-                                                <option value="">Todas las categorías</option>
-                                                <option value="Bebidas">Bebidas</option>
-                                                <option value="Snacks">Snacks</option>
-                                                <option value="Dulces">Dulces</option>
-                                                <option value="Lácteos">Lácteos</option>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <label for="filterCategory" class="form-label visually-hidden">Filtrar por categoría</label>
+                                            <select class="form-select" id="filterCategory" aria-label="Filtrar por categoría">
+                                                <option value="">📂 Todas las categorías</option>
+                                                <option value="Bebidas">🥤 Bebidas</option>
+                                                <option value="Snacks">🍿 Snacks</option>
+                                                <option value="Dulces">🍬 Dulces</option>
+                                                <option value="Lácteos">🥛 Lácteos</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-3">
-                                            <select class="form-select" id="filterStock">
-                                                <option value="">Todo el stock</option>
-                                                <option value="low">Stock bajo (&lt; 10)</option>
-                                                <option value="out">Sin stock</option>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <label for="filterStock" class="form-label visually-hidden">Filtrar por stock</label>
+                                            <select class="form-select" id="filterStock" aria-label="Filtrar por stock">
+                                                <option value="">📦 Todo el stock</option>
+                                                <option value="low">⚠️ Stock bajo (&lt; 10)</option>
+                                                <option value="out">❌ Sin stock</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-lg-1 col-md-6 col-sm-12">
                                             <button class="btn btn-outline-primary w-100"
-                                                onclick="AdminPanel.loadProducts()">
-                                                <i class="fas fa-refresh me-1"></i>Actualizar
+                                                onclick="AdminPanel.loadProducts()" title="Actualizar lista de productos">
+                                                <i class="fas fa-sync me-1"></i><span class="d-none d-md-inline">Actualizar</span>
                                             </button>
                                         </div>
                                     </div>
@@ -264,99 +269,128 @@
                         <div class="tab-pane fade" id="nav-reports" role="tabpanel">
                             <div class="admin-panel-section">
                                 <div class="section-header d-flex justify-content-between align-items-center mb-4">
-                                    <h3><i class="fas fa-chart-line me-2"></i>Dashboard Ejecutivo</h3>
                                     <div>
-                                        <button class="btn btn-primary me-2" onclick="AdminPanel.loadDashboardStats()">
+                                        <h3 class="mb-0"><i class="fas fa-chart-line me-2"></i>Reportes y Analítica</h3>
+                                        <small class="text-muted d-block mt-1">Visualiza métricas clave en tiempo real</small>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-primary" id="refreshReportsBtn" onclick="AdminPanel.loadDashboardStats()">
                                             <i class="fas fa-sync me-2"></i>Actualizar
                                         </button>
-                                        <button class="btn btn-outline-success" onclick="AdminPanel.exportReport()">
-                                            <i class="fas fa-download me-2"></i>Exportar PDF
+                                        <button class="btn btn-outline-success" onclick="window.print()">
+                                            <i class="fas fa-print me-2"></i>Imprimir
                                         </button>
                                     </div>
                                 </div>
 
-                                <!-- Tarjetas de Estadísticas -->
-                                <div class="row stats-cards mb-4">
-                                    <div class="col-lg-3 col-md-6 mb-3">
-                                        <div class="stat-card">
-                                            <div class="stat-icon gradient-primary"><i class="fas fa-boxes"></i></div>
-                                            <div class="stat-info">
-                                                <h5 id="totalProducts">0</h5>
-                                                <p>Productos Totales</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 mb-3">
-                                        <div class="stat-card">
-                                            <div class="stat-icon gradient-success"><i class="fas fa-shopping-cart"></i></div>
-                                            <div class="stat-info">
-                                                <h5 id="totalOrders">0</h5>
-                                                <p>Pedidos Totales</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 mb-3">
-                                        <div class="stat-card">
-                                            <div class="stat-icon gradient-info"><i class="fas fa-users"></i></div>
-                                            <div class="stat-info">
-                                                <h5 id="totalUsers">0</h5>
-                                                <p>Usuarios Registrados</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 mb-3">
-                                        <div class="stat-card">
-                                            <div class="stat-icon gradient-warning"><i class="fas fa-dollar-sign"></i></div>
-                                            <div class="stat-info">
-                                                <h5 id="totalRevenue">S/. 0</h5>
-                                                <p>Ingresos Totales</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Estado de pedidos resumido -->
+                                <!-- Analytics Grid -->
                                 <div class="row">
-                                    <div class="col-lg-4 mb-3">
-                                        <div class="analytics-card p-3">
-                                            <h6>Estado de Pedidos</h6>
-                                            <div class="d-flex justify-content-between">
-                                                <small>Pendientes</small><strong id="pendingOrders">0</strong>
+                                    <!-- Estado de Pedidos -->
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <div class="analytics-card h-100">
+                                            <div class="card-header-custom">
+                                                <h6 class="mb-0"><i class="fas fa-list me-2"></i>Estado de Pedidos</h6>
                                             </div>
-                                            <div class="d-flex justify-content-between">
-                                                <small>En Proceso</small><strong id="processingOrders">0</strong>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <small>Completados</small><strong id="completedOrders">0</strong>
+                                            <div class="analytics-content">
+                                                <div class="metric-row">
+                                                    <div class="metric-label">
+                                                        <span class="badge bg-warning">En Espera</span>
+                                                        Pendientes
+                                                    </div>
+                                                    <div class="metric-value" id="pendingOrders">0</div>
+                                                </div>
+                                                <hr class="my-2">
+                                                <div class="metric-row">
+                                                    <div class="metric-label">
+                                                        <span class="badge bg-info">En Progreso</span>
+                                                        En Proceso
+                                                    </div>
+                                                    <div class="metric-value" id="processingOrders">0</div>
+                                                </div>
+                                                <hr class="my-2">
+                                                <div class="metric-row">
+                                                    <div class="metric-label">
+                                                        <span class="badge bg-success">Completados</span>
+                                                        Entregados
+                                                    </div>
+                                                    <div class="metric-value" id="completedOrders">0</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4 mb-3">
-                                        <div class="analytics-card p-3">
-                                            <h6>Usuarios</h6>
-                                            <div class="d-flex justify-content-between">
-                                                <small>Administradores</small><strong id="adminUsers">0</strong>
+                                    <!-- Gestión de Usuarios -->
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <div class="analytics-card h-100">
+                                            <div class="card-header-custom">
+                                                <h6 class="mb-0"><i class="fas fa-people-cog me-2"></i>Gestión de Usuarios</h6>
                                             </div>
-                                            <div class="d-flex justify-content-between">
-                                                <small>Clientes</small><strong id="clientUsers">0</strong>
+                                            <div class="analytics-content">
+                                                <div class="user-stats">
+                                                    <div class="metric-row">
+                                                        <div class="metric-label">
+                                                            <i class="fas fa-crown text-danger me-2"></i>Administradores
+                                                        </div>
+                                                        <div class="metric-value" id="adminUsers">0</div>
+                                                    </div>
+                                                    <hr class="my-2">
+                                                    <div class="metric-row">
+                                                        <div class="metric-label">
+                                                            <i class="fas fa-user-circle text-primary me-2"></i>Clientes
+                                                        </div>
+                                                        <div class="metric-value" id="clientUsers">0</div>
+                                                    </div>
+                                                    <hr class="my-2">
+                                                    <div class="metric-row">
+                                                        <div class="metric-label">
+                                                            <strong>Total:</strong>
+                                                        </div>
+                                                        <div class="metric-value" id="totalUsersAnalytics">0</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4 mb-3">
-                                        <div class="analytics-card p-3">
-                                            <h6>Ventas</h6>
-                                            <div class="d-flex justify-content-between">
-                                                <small>Total Ventas</small><strong id="totalSales">S/. 0</strong>
+                                    <!-- Rendimiento de Ventas -->
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <div class="analytics-card h-100">
+                                            <div class="card-header-custom">
+                                                <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Rendimiento de Ventas</h6>
                                             </div>
-                                            <div class="d-flex justify-content-between">
-                                                <small>Órdenes</small><strong id="ordersCount">0</strong>
+                                            <div class="analytics-content">
+                                                <div class="sales-metrics">
+                                                    <div class="metric-row">
+                                                        <div class="metric-label">
+                                                            <i class="fas fa-sack-dollar text-success me-2"></i>Total de Ventas
+                                                        </div>
+                                                        <div class="metric-value text-success" id="totalSales">S/. 0.00</div>
+                                                    </div>
+                                                    <hr class="my-2">
+                                                    <div class="metric-row">
+                                                        <div class="metric-label">
+                                                            <i class="fas fa-receipt me-2"></i>Número de Órdenes
+                                                        </div>
+                                                        <div class="metric-value" id="ordersCount">0</div>
+                                                    </div>
+                                                    <hr class="my-2">
+                                                    <div class="metric-row">
+                                                        <div class="metric-label">
+                                                            <small class="text-muted">Promedio por orden</small>
+                                                        </div>
+                                                        <div class="metric-value text-info" id="averageOrder">S/. 0.00</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- Información adicional -->
+                                <div class="alert alert-info mt-4" role="alert">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Nota:</strong> Los datos se actualizan en tiempo real. Usa el botón "Actualizar" para obtener las últimas métricas.
+                                </div>
                             </div>
                         </div>
 
@@ -454,8 +488,11 @@
                             <label for="orderStatusSelect" class="form-label">Cambiar Estado</label>
                             <select id="orderStatusSelect" class="form-select">
                                 <option value="PENDIENTE">PENDIENTE</option>
-                                <option value="PROCESO">PROCESO</option>
-                                <option value="COMPLETADO">COMPLETADO</option>
+                                <option value="CONFIRMADO">CONFIRMADO</option>
+                                <option value="EN_PREPARACION">EN PREPARACION</option>
+                                <option value="EN_CAMINO">EN CAMINO</option>
+                                <option value="ENTREGADO">ENTREGADO</option>
+                                <option value="CANCELADO">CANCELADO</option>
                             </select>
                         </div>
                     </div>

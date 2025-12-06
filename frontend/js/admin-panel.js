@@ -1,46 +1,98 @@
 // ===== ADMIN PANEL MANAGER - MINIMARKET LA PARADA =====
+/**
+ * Gestor completo del panel administrativo
+ * Maneja productos, pedidos, usuarios y reportes
+ */
 class AdminPanelManager {
     constructor() {
         this.currentProduct = null;
         this.products = [];
+        this.ordersCache = [];
+        this.usersCache = [];
+        this.isLoading = false;
         this.init();
     }
 
     // ===== INITIALIZATION =====
     init() {
-        console.log('🔧 Initializing Admin Panel...');
+        console.log('🔧 Inicializando Panel Administrativo...');
         this.checkAdminAuth();
+        AUTH.init();
         this.loadProducts();
         this.bindEvents();
-        this.loadDashboardStats();
-        console.log('✅ Admin Panel ready');
+        this.setupErrorHandling();
+        
+        // Cargar estadísticas con delay para asegurar que el DOM está listo
+        setTimeout(() => {
+            console.log('⏱️ Cargando estadísticas del dashboard...');
+            this.loadDashboardStats();
+        }, 300);
+        
+        console.log('✅ Panel Administrativo listo');
+    }
+
+    /**
+     * Manejo global de errores
+     */
+    setupErrorHandling() {
+        window.addEventListener('error', (e) => {
+            console.error('❌ Error global:', e.message);
+            this.showNotification('Error: ' + e.message, 'danger');
+        });
     }
 
     // ===== AUTHENTICATION =====
     checkAdminAuth() {
         const user = API.getUser();
         if (!user || user.rol !== 'ADMINISTRADOR') {
-            console.warn('⚠️ Access denied: Not admin');
-            alert('Acceso denegado. Solo administradores pueden acceder a este panel.');
-            window.location.href = '../../index.html';
+            console.warn('⚠️ Acceso denegado: No es administrador');
+            this.showNotification('Acceso denegado. Solo administradores pueden acceder.', 'danger');
+            setTimeout(() => {
+                window.location.href = '../../index.html';
+            }, 1000);
             return false;
         }
 
-        // Update admin greeting
+        // Actualizar saludo del administrador
         const greeting = document.getElementById('adminGreeting');
         if (greeting) {
-            greeting.textContent = `Hola, ${user.nombre}`;
+            greeting.textContent = `${user.nombre}`;
         }
 
-        console.log('✅ Admin authenticated:', user.nombre);
+        console.log('✅ Administrador autenticado:', user.nombre);
         return true;
     }
 
     logout() {
-        if (confirm('¿Estás seguro de cerrar sesión?')) {
+        if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
             API.logout();
-            window.location.href = '../../index.html';
+            this.showNotification('Sesión cerrada correctamente', 'success');
+            setTimeout(() => {
+                window.location.href = '../../index.html';
+            }, 500);
         }
+    }
+
+    /**
+     * Mostrar notificación al usuario
+     */
+    showNotification(message, type = 'info') {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+        alertDiv.innerHTML = `
+            <strong>${type === 'danger' ? '❌ Error' : type === 'success' ? '✅ Éxito' : 'ℹ️ Información'}:</strong> ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        alertDiv.style.position = 'fixed';
+        alertDiv.style.top = '20px';
+        alertDiv.style.right = '20px';
+        alertDiv.style.zIndex = '9999';
+        alertDiv.style.maxWidth = '400px';
+        document.body.appendChild(alertDiv);
+
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 4000);
     }
 
     // ===== EVENT BINDING =====
@@ -79,6 +131,57 @@ class AdminPanelManager {
                 this.loadDashboardStats();
             });
         }
+
+        // Orders tab
+        const ordersTab = document.getElementById('nav-orders-tab');
+        if (ordersTab) {
+            ordersTab.addEventListener('shown.bs.tab', () => {
+                console.log('📦 Orders tab shown, loading orders...');
+                this.loadOrders();
+            });
+        }
+
+        // Users tab
+        const usersTab = document.getElementById('nav-users-tab');
+        if (usersTab) {
+            usersTab.addEventListener('shown.bs.tab', () => {
+                console.log('👥 Users tab shown, loading users...');
+                this.loadUsers();
+            });
+        }
+
+        // Refresh buttons
+        const refreshOrdersBtn = document.getElementById('refreshOrdersBtn');
+        if (refreshOrdersBtn) {
+            refreshOrdersBtn.addEventListener('click', () => this.loadOrders());
+        }
+
+        const refreshUsersBtn = document.getElementById('refreshUsersBtn');
+        if (refreshUsersBtn) {
+            refreshUsersBtn.addEventListener('click', () => this.loadUsers());
+        }
+
+        // Filter orders by status
+        const filterOrderStatus = document.getElementById('filterOrderStatus');
+        if (filterOrderStatus) {
+            filterOrderStatus.addEventListener('change', () => this.applyOrderStatusFilter());
+        }
+
+        // Order status and cancel buttons
+        const saveOrderStatusBtn = document.getElementById('saveOrderStatusBtn');
+        if (saveOrderStatusBtn) {
+            saveOrderStatusBtn.addEventListener('click', () => this.updateOrderStatus());
+        }
+
+        const cancelOrderBtn = document.getElementById('cancelOrderBtn');
+        if (cancelOrderBtn) {
+            cancelOrderBtn.addEventListener('click', () => {
+                const modal = document.getElementById('orderModal');
+                const orderId = modal.dataset.orderId;
+                if (orderId) this.cancelOrder(orderId);
+            });
+        }
+
     }
 
     // ===== PRODUCTS MANAGEMENT =====
@@ -459,6 +562,314 @@ class AdminPanelManager {
         }
     }
 
+    // ===== ORDERS MANAGEMENT =====
+    async loadOrders() {
+        console.log('📦 Loading orders...');
+        const tableBody = document.getElementById('ordersTableBody');
+        const loadingDiv = document.getElementById('ordersLoading');
+        const emptyDiv = document.getElementById('ordersEmpty');
+
+        // Show loading
+        if (loadingDiv) loadingDiv.style.display = 'block';
+        if (emptyDiv) emptyDiv.style.display = 'none';
+        if (tableBody) tableBody.innerHTML = '';
+
+        try {
+            const page = 0;
+            const size = 50;
+            const response = await API.request(`/orders?page=${page}&size=${size}`);
+            
+            // Handle paginated response
+            const orders = response.content || response || [];
+            console.log(`✅ Loaded ${orders.length} orders`);
+            
+            this.renderOrdersTable(orders);
+        } catch (error) {
+            console.error('❌ Error loading orders:', error);
+            if (tableBody) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center text-danger py-4">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Error al cargar pedidos: ${error.message}
+                        </td>
+                    </tr>
+                `;
+            }
+        } finally {
+            if (loadingDiv) loadingDiv.style.display = 'none';
+        }
+    }
+
+    renderOrdersTable(orders) {
+        const tableBody = document.getElementById('ordersTableBody');
+        if (!tableBody) return;
+
+        if (!orders || orders.length === 0) {
+            const emptyDiv = document.getElementById('ordersEmpty');
+            if (emptyDiv) emptyDiv.style.display = 'block';
+            tableBody.innerHTML = '';
+            return;
+        }
+
+        const emptyDiv = document.getElementById('ordersEmpty');
+        if (emptyDiv) emptyDiv.style.display = 'none';
+
+        tableBody.innerHTML = orders.map(order => {
+            const total = parseFloat(order.total || 0).toFixed(2);
+            const fecha = new Date(order.fechaCreacion || order.fecha).toLocaleDateString('es-PE');
+            const estado = order.estado || 'PENDIENTE';
+            const usuario = order.usuario?.nombre || order.usuarioNombre || 'Usuario #' + order.usuarioId;
+
+            return `
+                <tr>
+                    <td><strong>#${order.id}</strong></td>
+                    <td>${this.escapeHtml(usuario)}</td>
+                    <td><strong>S/. ${total}</strong></td>
+                    <td>${fecha}</td>
+                    <td>
+                        <span class="badge ${this.getOrderStatusBadgeClass(estado)}">
+                            ${estado}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button class="btn btn-outline-primary" 
+                                    onclick="AdminPanel.viewOrderDetails(${order.id})" 
+                                    title="Ver detalles">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-outline-warning" 
+                                    onclick="AdminPanel.editOrderStatus(${order.id})" 
+                                    title="Cambiar estado">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    getOrderStatusBadgeClass(status) {
+        switch (status) {
+            case 'PENDIENTE':
+            case 'CONFIRMADO':
+                return 'bg-warning';
+            case 'EN_PREPARACION':
+            case 'EN_CAMINO':
+                return 'bg-info';
+            case 'ENTREGADO':
+                return 'bg-success';
+            case 'CANCELADO':
+                return 'bg-danger';
+            default:
+                return 'bg-secondary';
+        }
+    }
+
+    async viewOrderDetails(orderId) {
+        console.log(`👁️ Viewing order ${orderId}`);
+        try {
+            const order = await API.request(`/orders/${orderId}`);
+            
+            // Update modal with order details
+            document.getElementById('orderIdView').textContent = order.id;
+            document.getElementById('orderUserView').textContent = order.usuario?.nombre || 'Usuario #' + order.usuarioId;
+            document.getElementById('orderTotalView').textContent = parseFloat(order.total || 0).toFixed(2);
+            
+            // Items list
+            const itemsList = document.getElementById('orderItemsList');
+            if (order.items && order.items.length > 0) {
+                itemsList.innerHTML = order.items.map(item => `
+                    <li>
+                        <strong>${this.escapeHtml(item.productoNombre || 'Producto')}</strong> x${item.cantidad} = S/. ${parseFloat(item.precio || 0).toFixed(2)}
+                    </li>
+                `).join('');
+            } else {
+                itemsList.innerHTML = '<li>No hay ítems</li>';
+            }
+            
+            // Set current status in select
+            document.getElementById('orderStatusSelect').value = order.estado || 'PENDIENTE';
+            
+            // Store order ID for updates
+            document.getElementById('orderModal').dataset.orderId = orderId;
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('orderModal'));
+            modal.show();
+            
+        } catch (error) {
+            console.error('❌ Error loading order:', error);
+            alert('Error al cargar el pedido: ' + error.message);
+        }
+    }
+
+    async editOrderStatus(orderId) {
+        this.viewOrderDetails(orderId);
+    }
+
+    async updateOrderStatus() {
+        const modal = document.getElementById('orderModal');
+        const orderId = modal.dataset.orderId;
+        const newStatus = document.getElementById('orderStatusSelect').value;
+
+        console.log(`🔄 Updating order ${orderId} status to ${newStatus}`);
+
+        try {
+            await API.request(`/orders/${orderId}/status`, {
+                method: 'PUT',
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            console.log('✅ Order status updated');
+            this.showSuccess(`Pedido #${orderId} actualizado a ${newStatus}`);
+            
+            // Close modal and reload
+            bootstrap.Modal.getInstance(modal).hide();
+            await this.loadOrders();
+
+        } catch (error) {
+            console.error('❌ Error updating order status:', error);
+            this.showError('Error al actualizar estado: ' + error.message);
+        }
+    }
+
+    async cancelOrder(orderId) {
+        if (!confirm('¿Estás seguro de que deseas cancelar este pedido?')) return;
+
+        console.log(`❌ Cancelling order ${orderId}`);
+
+        try {
+            await API.request(`/orders/${orderId}`, {
+                method: 'DELETE'
+            });
+
+            console.log('✅ Order cancelled');
+            this.showSuccess(`Pedido #${orderId} cancelado`);
+            
+            // Close modal and reload
+            const modal = document.getElementById('orderModal');
+            bootstrap.Modal.getInstance(modal).hide();
+            await this.loadOrders();
+
+        } catch (error) {
+            console.error('❌ Error cancelling order:', error);
+            this.showError('Error al cancelar pedido: ' + error.message);
+        }
+    }
+
+    applyOrderStatusFilter() {
+        const filterStatus = document.getElementById('filterOrderStatus')?.value;
+        if (!filterStatus) {
+            this.loadOrders();
+            return;
+        }
+        
+        console.log(`🔍 Filtering orders by status: ${filterStatus}`);
+        // TODO: Implement filter if API supports it, for now reload all
+        this.loadOrders();
+    }
+
+    // ===== USERS MANAGEMENT =====
+    async loadUsers() {
+        console.log('👥 Loading users...');
+        const tableBody = document.getElementById('usersTableBody');
+        const loadingDiv = document.getElementById('usersLoading');
+        const emptyDiv = document.getElementById('usersEmpty');
+
+        // Show loading
+        if (loadingDiv) loadingDiv.style.display = 'block';
+        if (emptyDiv) emptyDiv.style.display = 'none';
+        if (tableBody) tableBody.innerHTML = '';
+
+        try {
+            const users = await API.request('/users');
+            console.log(`✅ Loaded ${users.length} users`);
+            
+            this.renderUsersTable(users);
+        } catch (error) {
+            console.error('❌ Error loading users:', error);
+            if (tableBody) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center text-danger py-4">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Error al cargar usuarios: ${error.message}
+                        </td>
+                    </tr>
+                `;
+            }
+        } finally {
+            if (loadingDiv) loadingDiv.style.display = 'none';
+        }
+    }
+
+    renderUsersTable(users) {
+        const tableBody = document.getElementById('usersTableBody');
+        if (!tableBody) return;
+
+        if (!users || users.length === 0) {
+            const emptyDiv = document.getElementById('usersEmpty');
+            if (emptyDiv) emptyDiv.style.display = 'block';
+            tableBody.innerHTML = '';
+            return;
+        }
+
+        const emptyDiv = document.getElementById('usersEmpty');
+        if (emptyDiv) emptyDiv.style.display = 'none';
+
+        tableBody.innerHTML = users.map(user => {
+            const isActive = user.activo !== false;
+            return `
+                <tr>
+                    <td><strong>#${user.id}</strong></td>
+                    <td>${this.escapeHtml(user.nombre)}</td>
+                    <td>${this.escapeHtml(user.email)}</td>
+                    <td>${this.escapeHtml(user.telefono || '-')}</td>
+                    <td>
+                        <span class="badge ${isActive ? 'bg-success' : 'bg-danger'}">
+                            ${isActive ? 'Activo' : 'Inactivo'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button class="btn btn-outline-primary" 
+                                    onclick="AdminPanel.viewUserDetails(${user.id})" 
+                                    title="Ver detalles">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    async viewUserDetails(userId) {
+        console.log(`👁️ Viewing user ${userId}`);
+        try {
+            const user = await API.request(`/users/${userId}`);
+            
+            // Update modal with user details
+            document.getElementById('userIdView').textContent = user.id;
+            document.getElementById('userNameView').textContent = this.escapeHtml(user.nombre);
+            document.getElementById('userEmailView').textContent = this.escapeHtml(user.email);
+            document.getElementById('userPhoneView').textContent = this.escapeHtml(user.telefono || '-');
+            document.getElementById('userAddressView').textContent = this.escapeHtml(user.direccion || '-');
+            document.getElementById('userActiveView').textContent = user.activo !== false ? 'Sí' : 'No';
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('userModal'));
+            modal.show();
+            
+        } catch (error) {
+            console.error('❌ Error loading user:', error);
+            alert('Error al cargar el usuario: ' + error.message);
+        }
+    }
+
     // ===== DASHBOARD STATISTICS =====
     async loadDashboardStats() {
         console.log('📊 Loading dashboard statistics...');
@@ -496,41 +907,92 @@ class AdminPanelManager {
     }
 
     updateDashboardUI(dashboard, sales, users) {
+        console.log('📊 Updating Dashboard UI with:', { dashboard, sales, users });
+        
         // Handle errors
         if (dashboard.error || sales.error || users.error) {
             console.warn('Some stats failed to load:', { dashboard: dashboard.error, sales: sales.error, users: users.error });
         }
 
-        // General stats
-        if (!dashboard.error) {
-            this.updateElement('totalProducts', dashboard.totalProducts || 0);
-            this.updateElement('totalOrders', dashboard.totalOrders || 0);
-            this.updateElement('totalUsers', dashboard.totalUsers || 0);
-            this.updateElement('totalRevenue', `S/. ${parseFloat(dashboard.totalRevenue || 0).toFixed(2)}`);
-            this.updateElement('pendingOrders', dashboard.pendingOrders || 0);
-            this.updateElement('completedOrders', dashboard.completedOrders || 0);
+        // General stats - Handle both snake_case and camelCase from backend
+        if (!dashboard.error && dashboard !== null && dashboard !== undefined) {
+            // Total Products
+            const totalProducts = dashboard.totalProducts || dashboard.total_products || 0;
+            this.updateElement('totalProducts', totalProducts);
+            
+            // Total Orders
+            const totalOrders = dashboard.totalOrders || dashboard.total_orders || 0;
+            this.updateElement('totalOrders', totalOrders);
+            
+            // Total Users
+            const totalUsers = dashboard.totalUsers || dashboard.total_users || 0;
+            this.updateElement('totalUsers', totalUsers);
+            
+            // Total Revenue
+            const totalRevenue = dashboard.totalRevenue || dashboard.total_revenue || 0;
+            this.updateElement('totalRevenue', `S/. ${parseFloat(totalRevenue || 0).toFixed(2)}`);
+            
+            // Order breakdown - Handle multiple field name variations
+            const pendingOrders = dashboard.pendingOrders || dashboard.pending_orders || dashboard.pendientes || 0;
+            this.updateElement('pendingOrders', pendingOrders);
+            
+            const processingOrders = dashboard.processingOrders || dashboard.processing_orders || dashboard.enCamino || dashboard.en_camino || 0;
+            this.updateElement('processingOrders', processingOrders);
+            
+            const completedOrders = dashboard.completedOrders || dashboard.completed_orders || dashboard.entregados || 0;
+            this.updateElement('completedOrders', completedOrders);
+            
+            console.log('✅ Dashboard main stats updated:', { totalProducts, totalOrders, totalUsers, totalRevenue });
         }
 
         // Sales stats
-        if (!sales.error) {
-            this.updateElement('totalSales', `S/. ${parseFloat(sales.totalSales || 0).toFixed(2)}`);
-            this.updateElement('ordersCount', sales.totalOrders || 0);
-            this.updateElement('averageOrder', `S/. ${parseFloat(sales.averageOrder || 0).toFixed(2)}`);
+        if (!sales.error && sales !== null && sales !== undefined) {
+            const totalSales = sales.totalSales || sales.total_sales || 0;
+            this.updateElement('totalSales', `S/. ${parseFloat(totalSales || 0).toFixed(2)}`);
+            
+            const ordersCount = sales.totalOrders || sales.total_orders || sales.ordersCount || 0;
+            this.updateElement('ordersCount', ordersCount);
+            
+            // Calculate average order value
+            let averageOrder = 0;
+            if (ordersCount > 0) {
+                averageOrder = parseFloat(totalSales) / parseFloat(ordersCount);
+            }
+            this.updateElement('averageOrder', `S/. ${averageOrder.toFixed(2)}`);
+            
+            console.log('✅ Sales stats updated:', { totalSales, ordersCount, averageOrder });
         }
 
         // User stats
-        if (!users.error) {
-            this.updateElement('adminUsers', users.adminUsers || 0);
-            this.updateElement('clientUsers', users.clientUsers || 0);
+        if (!users.error && users !== null && users !== undefined) {
+            const adminUsers = users.adminUsers || users.admin_users || users.admins || 0;
+            this.updateElement('adminUsers', adminUsers);
+            
+            const clientUsers = users.clientUsers || users.client_users || users.clients || 0;
+            this.updateElement('clientUsers', clientUsers);
+            
+            // Total users in analytics section
+            const totalAnalyticsUsers = (adminUsers || 0) + (clientUsers || 0);
+            this.updateElement('totalUsersAnalytics', totalAnalyticsUsers);
+            
+            console.log('✅ User stats updated:', { adminUsers, clientUsers, totalUsersAnalytics: totalAnalyticsUsers });
         }
 
-        console.log('✅ Dashboard UI updated');
+        console.log('✅ Dashboard UI fully updated');
     }
 
     updateElement(id, value) {
         const element = document.getElementById(id);
         if (element) {
             element.textContent = value;
+            console.log(`✏️ Updated #${id} with value: ${value}`);
+        } else {
+            console.warn(`⚠️ Element with ID "${id}" not found in DOM`);
+            // Try to find it with different approaches
+            const allElements = document.querySelectorAll(`[id*="${id}"]`);
+            if (allElements.length > 0) {
+                console.log(`Found ${allElements.length} elements with similar ID:`, allElements);
+            }
         }
     }
 
@@ -547,11 +1009,18 @@ class AdminPanelManager {
         alert('Error: ' + message);
     }
 
+    exportReport() {
+        console.log('📥 Exporting report...');
+        alert('La funcionalidad de exportar reportes estará disponible pronto. Por ahora puedes descargar desde el navegador (Ctrl+S o Cmd+S).');
+    }
+
     // ===== PUBLIC API METHODS =====
     refreshAll() {
         console.log('🔄 Refreshing all data...');
         return Promise.all([
             this.loadProducts(),
+            this.loadOrders(),
+            this.loadUsers(),
             this.loadDashboardStats()
         ]);
     }
